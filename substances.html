@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substâncias Químicas | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Content Cards */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Estilos específicos para substâncias */
+        .substancias-section {
+            background-color: var(--background-light);
+            padding-bottom: 3rem;
+            padding-top: 3rem;
+        }
+
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .filter-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .substancia-card .card-icon {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+        }
+
+        .list-group-item {
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .list-group-item:hover {
+            background-color: var(--background-light);
+            border-left-color: var(--accent-color);
+        }
+
+        .form-check-input:checked + span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* Modal de substância */
+        .substancia-modal .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .substancia-modal .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+
+        .substancia-modal .modal-body {
+            padding: 2rem;
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section h5 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Botões */
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Paginação */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .page-item {
+            margin: 0 0.25rem;
+        }
+        
+        .page-link {
+            display: block;
+            padding: 0.45rem 0.85rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background-color: var(--background-light);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .substancia-modal .modal-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="substancias.html"><i class="fas fa-pills me-1"></i>Substâncias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html"><i class="fas fa-book me-1"></i>Recursos</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Substâncias Químicas</h1>
+                    <p class="slide-in">Informações sobre diferentes substâncias, seus efeitos, riscos e orientações para redução de danos.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#substancias" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-pills me-2"></i>Ver Substâncias
+                        </a>
+                        <a href="#como-funciona" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-info-circle me-2"></i>Sobre
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-flask" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section id="como-funciona" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Informações sobre Substâncias</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3 class="card-title">Informação Confiável</h3>
+                            <p class="card-text">Dados baseados em evidências científicas e orientações de saúde pública.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="card-title">Redução de Danos</h3>
+                            <p class="card-text">Orientações práticas para minimizar riscos associados ao uso de substâncias.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h3 class="card-title">Efeitos e Riscos</h3>
+                            <p class="card-text">Descrição detalhada dos efeitos físicos e psicológicos de cada substância.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h3 class="card-title">Buscando Ajuda</h3>
+                            <p class="card-text">Informações sobre quando e como buscar ajuda profissional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Substâncias Section -->
+    <section id="substancias" class="substancias-section">
+        <div class="container">
+            <h2 class="section-title mb-3">Substâncias Químicas</h2>
+            <p class="text-center mb-5">Selecione uma substância para obter informações detalhadas</p>
+            
+            <div class="row">
+                <!-- Filtros -->
+                <div class="col-lg-3 mb-4">
+                    <div class="card search-filter-card">
+                        <div class="card-body">
+                            <h4 class="filter-title mb-3">
+                                <i class="fas fa-filter me-2"></i>Filtrar
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Buscar:</label>
+                                <input type="text" class="form-control" id="buscaSubstancia" placeholder="Nome da substância">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Categoria:</label>
+                                <select class="form-select" id="categoriaSubstancia">
+                                    <option value="all">Todas</option>
+                                    <option value="Cannabinoids">Cannabinoids</option>
+                                    <option value="Depressants">Depressants</option>
+                                    <option value="Dissociatives">Dissociatives</option>
+                                    <option value="Empathogens">Empathogens</option>
+                                    <option value="Opioids">Opioids</option>
+                                    <option value="Psychedelics">Psychedelics</option>
+                                    <option value="Stimulants">Stimulants</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn btn-primary-custom w-100" id="aplicarFiltrosSubstancias">
+                                <i class="fas fa-search me-2"></i>Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Substâncias -->
+                <div class="col-lg-9">
+                    <div class="row g-4" id="listaSubstancias">
+                        <!-- Substâncias serão carregadas aqui via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Paginação -->
+                <div class="pagination-container" id="paginacaoContainer">
+                    <ul class="pagination" id="paginacao">
+                        <!-- Paginação será gerada via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal da Substância -->
+    <div class="modal fade substancia-modal" id="substanciaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="substanciaModalLabel">Substância</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center">
+                                <img id="substanciaImagem" src="https://via.placeholder.com/300" class="img-fluid rounded mb-3" alt="Imagem da substância">
+                                <div class="d-flex flex-wrap justify-content-center gap-2">
+                                    <span class="badge bg-primary" id="substanciaCategoria">Categoria</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="info-section">
+                                <h5>O que é</h5>
+                                <p id="substanciaDescricao">Descrição da substância...</p>
+                            </div>
+                            
+                            <div class="info-section">
+                                <h5>Como é usado</h5>
+                                <p id="substanciaUso">Formas de uso...</p>
+                            </div>
+                            
+                            <div class="info-section">
+                                <h5>Efeitos</h5>
+                                <div id="substanciaEfeitos">
+                                    <p>Efeitos a curto e longo prazo...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-section">
+                                <h5>Overdose</h5>
+                                <div id="substanciaOverdose">
+                                    <p>Informações sobre overdose...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-section">
+                                <h5>Buscando Ajuda</h5>
+                                <div id="substanciaAjuda">
+                                    <p>Orientações para buscar ajuda...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="substancias.html">Substâncias</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="recursos.html">Artigos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dados das substâncias
+        const substanciasData = [
+            {
+                id: 1,
+                nome: "2C-B",
+                categoria: "Psychedelics",
+                imagem: "https://cdn.adf.org.au/media/images/2cb-social.2e16d0ba.fill-1200x1200.webp",
+                descricao: "O 2C-B (4-bromo-2,5-dimetoxifeniletilamina) é uma substância psicodélica sintética da família das feniletilaminas. Foi sintetizado pela primeira vez em 1974 pelo químico Alexander Shulgin.",
+                uso: "Geralmente consumido por via oral em forma de pó ou comprimido. Também pode ser insuflado (cheirado), o que produz efeitos mais intensos mas de menor duração.",
+                efeitos: [
+                    "Alterações na percepção visual (cores mais vibrantes, padrões geométricos)",
+                    "Sensação de euforia e bem-estar",
+                    "Aumento da sensibilidade tátil",
+                    "Alterações no pensamento e na percepção do tempo",
+                    "Possíveis efeitos colaterais: náusea, ansiedade, confusão mental"
+                ],
+                overdose: "Embora rara, a overdose pode causar hipertensão, taquicardia, hipertermia e em casos extremos, convulsões ou perda de consciência. Não há antídoto específico, o tratamento é sintomático.",
+                ajuda: "Se você ou alguém que você conhece está tendo dificuldades com o uso de 2C-B, considere buscar ajuda profissional. Psicólogos e psiquiatras especializados em dependência química podem oferecer suporte."
+            },
+            {
+                id: 2,
+                nome: "Álcool",
+                categoria: "Depressants",
+                imagem: "https://www.liquor.com/thmb/M1fMQ2L_co8Yp2-mAkfpHD75BwE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/shelf-life-Primary-Hero-4000x4000-20c6efdb455e4f388d518fb4a7ab0445.jpg",
+                descricao: "O álcool (etanol) é uma substância depressor do sistema nervoso central e é a droga psicoativa mais amplamente consumida no mundo.",
+                uso: "Consumido por via oral em diversas formas (cerveja, vinho, destilados).",
+                efeitos: [
+                    "Desinibição e euforia inicial",
+                    "Redução da coordenação motora e tempo de reação",
+                    "Fala arrastada em doses mais altas",
+                    "Possível perda de consciência em doses muito altas",
+                    "Risco de dependência física e psicológica com uso crônico"
+                ],
+                overdose: "A overdose de álcool (intoxicação alcoólica) pode levar a depressão respiratória, coma e morte. Sinais incluem vômitos, convulsões, respiração lenta e irregular, hipotermia e pele pálida ou azulada.",
+                ajuda: "Grupos de apoio como Alcoólicos Anônimos (AA) podem ser úteis. Para dependência grave, a desintoxicação deve ser feita com supervisão médica devido ao risco de síndrome de abstinência grave."
+            },
+            {
+                id: 3,
+                nome: "Anfetaminas",
+                categoria: "Stimulants",
+                imagem: "https://www.antolex.es/wp-content/uploads/2020/11/Hipnosedantes-drogas-consumidas-en-Espana-2020.jpg",
+                descricao: "As anfetaminas são um grupo de substâncias estimulantes do sistema nervoso central que aumentam a atividade dos neurotransmissores dopamina e noradrenalina.",
+                uso: "Podem ser consumidas por via oral, insufladas, fumadas ou injetadas, dependendo da forma da substância.",
+                efeitos: [
+                    "Aumento de energia e estado de alerta",
+                    "Redução da fadiga e do apetite",
+                    "Sensação de euforia e confiança",
+                    "Possíveis efeitos colaterais: ansiedade, paranóia, taquicardia",
+                    "Risco de psicose anfetamínica com uso crônico"
+                ],
+                overdose: "A overdose pode causar hipertensão grave, arritmias cardíacas, hipertermia, convulsões e morte. O tratamento é sintomático e pode incluir sedativos.",
+                ajuda: "O tratamento para dependência de anfetaminas geralmente envolve terapia comportamental e, em alguns casos, medicação para sintomas de abstinência ou comorbidades psiquiátricas."
+            },
+            {
+                id: 4,
+                nome: "Benzodiazepínicos",
+                categoria: "Depressants",
+                imagem: "https://www.dea.gov/sites/default/files/drug_fact_sheets/sites/getsmartaboutdrugs.com/files/styles/drugfactsimage/public/benzodiazepine.jpg",
+                descricao: "Os benzodiazepínicos são uma classe de medicamentos depressores do SNC com efeitos ansiolíticos, hipnóticos, anticonvulsivantes e relaxantes musculares.",
+                uso: "Normalmente consumidos por via oral como comprimidos, mas podem ser injetados em contextos médicos.",
+                efeitos: [
+                    "Redução da ansiedade e indução de relaxamento",
+                    "Sonolência e sedação",
+                    "Redução da coordenação motora",
+                    "Amnésia anterógrada em doses mais altas",
+                    "Alto risco de dependência física e psicológica"
+                ],
+                overdose: "A overdose isolada raramente é fatal, mas em combinação com álcool ou opioides pode causar depressão respiratória grave e morte. O flumazenil é o antídoto específico.",
+                ajuda: "A descontinuação deve ser gradual (desmame) sob supervisão médica devido ao risco de convulsões na abstinência. Terapia cognitivo-comportamental pode ajudar no tratamento da dependência."
+            },
+            {
+                id: 5,
+                nome: "Cannabis",
+                categoria: "Cannabinoids",
+                imagem: "https://images.prismic.io/sunnyside/c958e937-5e31-4cee-8c81-c1409a81bad9_Sunnyside_2021_Blog_Header_1000x1000_Basic-Forms-of-Cannabis.jpg",
+                descricao: "A cannabis é uma planta que contém compostos psicoativos chamados canabinoides, sendo o THC (tetrahidrocanabinol) o principal responsável pelos efeitos psicoativos.",
+                uso: "Pode ser fumada, vaporizada ou consumida em comestíveis. Também disponível em formas farmacêuticas para uso medicinal.",
+                efeitos: [
+                    "Relaxamento e euforia",
+                    "Alterações na percepção sensorial",
+                    "Aumento do apetite ('larica')",
+                    "Possíveis efeitos colaterais: ansiedade, paranóia (especialmente em doses altas)",
+                    "Prejuízos na memória de curto prazo durante o efeito"
+                ],
+                overdose: "Não há relatos de overdose fatal por cannabis isolada, mas doses muito altas podem causar desconforto intenso, ansiedade, paranóia e em raros casos, psicose transitória.",
+                ajuda: "Para usuários que desejam reduzir ou parar o uso, terapia cognitivo-comportamental e grupos de apoio podem ser eficazes. Em casos de uso problemático, um psiquiatra pode ajudar."
+            },
+            {
+                id: 6,
+                nome: "Cocaína",
+                categoria: "Stimulants",
+                imagem: "https://www.drugfreekidscanada.org/wp-content/uploads/2023/04/coke-crack-featured3.jpeg",
+                descricao: "A cocaína é um potente estimulante do sistema nervoso central derivado da planta de coca. Age principalmente aumentando os níveis de dopamina no cérebro.",
+                uso: "Pode ser insuflada (cheirada), fumada (na forma de crack) ou injetada.",
+                efeitos: [
+                    "Euforia intensa e aumento de energia",
+                    "Sensação de poder e confiança",
+                    "Redução do apetite e da necessidade de sono",
+                    "Possíveis efeitos colaterais: ansiedade, paranóia, arritmias cardíacas",
+                    "Alto potencial de dependência psicológica"
+                ],
+                overdose: "Pode causar infarto do miocárdio, acidente vascular cerebral, convulsões ou morte súbita por arritmia cardíaca. Não há antídoto específico, o tratamento é sintomático.",
+                ajuda: "O tratamento pode incluir terapia comportamental, medicamentos para sintomas de abstinência e tratamento de comorbidades psiquiátricas. Grupos de apoio como Narcóticos Anônimos podem ajudar."
+            },
+            {
+                id: 7,
+                nome: "Heroína",
+                categoria: "Opioids",
+                imagem: "https://images.newscientist.com/wp-content/uploads/2018/06/27173612/gettyimages-898512508.jpg",
+                descricao: "A heroína é um opioide derivado da morfina, com potentes efeitos analgésicos e euforizantes. É uma das drogas com maior potencial de dependência física.",
+                uso: "Pode ser injetada, fumada ou aspirada.",
+                efeitos: [
+                    "Euforia intensa seguida de sonolência",
+                    "Alívio da dor e sensação de calor",
+                    "Depressão respiratória (especialmente em doses altas)",
+                    "Constipação intestinal",
+                    "Síndrome de abstinência intensa após uso crônico"
+                ],
+                overdose: "A overdose de heroína (e outros opioides) causa depressão respiratória, coma e pode levar à morte. O naloxone é o antídoto específico e pode reverter os efeitos da overdose.",
+                ajuda: "O tratamento pode incluir terapia de substituição com metadona ou buprenorfina, além de suporte psicossocial. Programas de redução de danos podem fornecer naloxone e orientações sobre uso mais seguro."
+            },
+            {
+                id: 8,
+                nome: "LSD",
+                categoria: "Psychedelics",
+                imagem: "https://as2.ftcdn.net/v2/jpg/05/75/31/79/1000_F_575317929_ogCCQErJVhDDwJE5bux7sOd1JwAkOSNt.jpg",
+                descricao: "O LSD (dietilamida do ácido lisérgico) é um potente psicodélico da classe das triptaminas, conhecido por seus efeitos alucinógenos e alterações profundas na percepção.",
+                uso: "Normalmente consumido por via oral em pequenos pedaços de papel absorvente (selos) ou em forma líquida.",
+                efeitos: [
+                    "Alterações visuais intensas (padrões geométricos, distorções)",
+                    "Sinestesia (mistura de sentidos, como 'ver' sons)",
+                    "Alterações no pensamento e na percepção do tempo",
+                    "Possíveis experiências espirituais ou místicas",
+                    "Possíveis efeitos colaterais: ansiedade, 'bad trip'"
+                ],
+                overdose: "Não há relatos de overdose fatal por LSD, mas doses muito altas podem causar angústia psicológica intensa e risco de acidentes devido à alteração da percepção.",
+                ajuda: "Em caso de 'bad trip', é importante permanecer em ambiente calmo e seguro. Para uso problemático, terapia e redução do uso podem ser indicados. Não há síndrome de abstinência física."
+            },
+            {
+                id: 9,
+                nome: "MDMA (Ecstasy)",
+                categoria: "Empathogens",
+                imagem: "https://bodypositive.org.nz/Pages/Alcohol_and_Drugs/Ecstasy/index_files/stacks-image-2b7ed36-300x300.jpg",
+                descricao: "O MDMA (3,4-metilenodioximetanfetamina) é uma substância psicoativa com efeitos estimulantes e entactógenos, conhecida por promover sentimentos de empatia e conexão emocional.",
+                uso: "Normalmente consumido por via oral em comprimidos ou cápsulas.",
+                efeitos: [
+                    "Sensação intensa de bem-estar e conexão com os outros",
+                    "Aumento da energia e estado de alerta",
+                    "Melhora da percepção sensorial (especialmente tátil)",
+                    "Possíveis efeitos colaterais: desidratação, hipertermia, 'depressão pós-MDMA'",
+                    "Risco de neurotoxicidade com uso frequente"
+                ],
+                overdose: "Pode causar hipertermia grave (aumento da temperatura corporal), desidratação ou hiponatremia (baixo sódio no sangue). O tratamento é sintomático e inclui resfriamento corporal.",
+                ajuda: "É importante aguardar pelo menos 1-2 meses entre usos para permitir a recuperação cerebral. Para uso problemático, terapia e suporte psicológico podem ajudar."
+            },
+            {
+                id: 10,
+                nome: "Psilocibina (Cogumelos Mágicos)",
+                categoria: "Psychedelics",
+                imagem: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Psilocybe_semilanceata_6514.jpg",
+                descricao: "A psilocibina é um composto psicodélico natural encontrado em certas espécies de cogumelos. No corpo, é convertida em psilocina, que age nos receptores de serotonina.",
+                uso: "Consumidos por via oral, geralmente frescos ou secos, ou em forma de chá.",
+                efeitos: [
+                    "Alterações na percepção visual e auditiva",
+                    "Mudanças no pensamento e na percepção do tempo",
+                    "Possíveis experiências espirituais ou introspectivas",
+                    "Possíveis efeitos colaterais: náusea, ansiedade, confusão",
+                    "Risco de 'bad trip' em ambientes inadequados"
+                ],
+                overdose: "Não há relatos de overdose fatal por psilocibina, mas doses muito altas podem causar angústia psicológica intensa. O risco maior é de acidentes devido à alteração da percepção.",
+                ajuda: "Em caso de experiência difícil, é importante permanecer em ambiente seguro. Para uso problemático, redução do uso e suporte psicológico podem ser indicados."
+            },
+            {
+                id: 11,
+                nome: "Tranq (Xylazina)",
+                categoria: "Depressants",
+                imagem: "https://www.ekinos.com.ar/images/w1000_h667_at__20180611110340xilacina_richmond.jpg",
+                descricao: "A xylazina é um sedativo veterinário que tem aparecido como adulterante em heroína e fentanil, conhecido como 'tranq' ou 'tranq dope'.",
+                uso: "Normalmente injetado em combinação com opioides.",
+                efeitos: [
+                    "Sedação intensa e sonolência",
+                    "Hipotensão e bradicardia",
+                    "Lesões de pele e necrose no local de injeção",
+                    "Risco aumentado de overdose quando combinado com opioides",
+                    "Síndrome de abstinência grave"
+                ],
+                overdose: "A overdose pode causar depressão respiratória grave, coma e morte, especialmente quando combinada com opioides. Não há antídoto específico para xylazina, apenas para o componente opioide (naloxone).",
+                ajuda: "É essencial buscar ajuda médica para desintoxicação supervisionada. Programas de redução de danos podem fornecer naloxone e orientações sobre uso mais seguro."
+            }
+        ];
+
+        // Variáveis de estado para paginação
+        let currentPage = 1;
+        const itemsPerPage = 6; // Número de itens por página
+
+        // Função para renderizar as substâncias
+        function renderizarSubstancias(filtroCategoria = 'all', filtroBusca = '', page = 1) {
+            const container = document.getElementById('listaSubstancias');
+            const paginationContainer = document.getElementById('paginacao');
+            
+            container.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            
+            const substanciasFiltradas = substanciasData.filter(s => {
+                const categoriaMatch = filtroCategoria === 'all' || s.categoria === filtroCategoria;
+                const buscaMatch = filtroBusca === '' || s.nome.toLowerCase().includes(filtroBusca.toLowerCase());
+                return categoriaMatch && buscaMatch;
+            });
+            
+            if (substanciasFiltradas.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-question-circle fa-3x mb-3" style="color: var(--accent-color);"></i>
+                        <h4>Nenhuma substância encontrada</h4>
+                        <p class="text-muted">Tente ajustar os filtros de busca</p>
+                    </div>
+                `;
+                document.getElementById('paginacaoContainer').style.display = 'none';
+                return;
+            }
+            
+            // Calcular itens para a página atual
+            const totalPages = Math.ceil(substanciasFiltradas.length / itemsPerPage);
+            currentPage = Math.min(Math.max(page, 1), totalPages); // Garantir que a página está dentro dos limites
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, substanciasFiltradas.length);
+            const substanciasPagina = substanciasFiltradas.slice(startIndex, endIndex);
+            
+            // Renderizar substâncias da página atual
+            substanciasPagina.forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="card content-card h-100">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <h3 class="card-title">${s.nome}</h3>
+                            <p class="card-text">${s.descricao.substring(0, 100)}...</p>
+                            <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mt-3">
+                                <span class="badge bg-primary">${s.categoria}</span>
+                                <button class="btn btn-outline-custom btn-sm detalhes-substancia" data-id="${s.id}">
+                                    <i class="fas fa-info-circle me-1"></i>Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Configurar eventos dos botões
+            document.querySelectorAll('.detalhes-substancia').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    mostrarDetalhesSubstancia(id);
+                });
+            });
+            
+            // Renderizar paginação
+            document.getElementById('paginacaoContainer').style.display = 'flex';
+            
+            // Botão Anterior
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#" aria-label="Anterior">&laquo;</a>`;
+            prevItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    renderizarSubstancias(filtroCategoria, filtroBusca, currentPage - 1);
+                }
+            });
+            paginationContainer.appendChild(prevItem);
+            
+            // Números das páginas
+            const maxVisiblePages = 5; // Número máximo de páginas visíveis na paginação
+            let startPage, endPage;
+            
+            if (totalPages <= maxVisiblePages) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+                const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+                
+                if (currentPage <= maxPagesBeforeCurrent) {
+                    startPage = 1;
+                    endPage = maxVisiblePages;
+                } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+                    startPage = totalPages - maxVisiblePages + 1;
+                    endPage = totalPages;
+                } else {
+                    startPage = currentPage - maxPagesBeforeCurrent;
+                    endPage = currentPage + maxPagesAfterCurrent;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarSubstancias(filtroCategoria, filtroBusca, i);
+                });
+                paginationContainer.appendChild(pageItem);
+            }
+            
+            // Botão Próximo
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#" aria-label="Próximo">&raquo;</a>`;
+            nextItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    renderizarSubstancias(filtroCategoria, filtroBusca, currentPage + 1);
+                }
+            });
+            paginationContainer.appendChild(nextItem);
+        }
+
+        // Função para mostrar detalhes da substância
+        function mostrarDetalhesSubstancia(id) {
+            const substancia = substanciasData.find(s => s.id === id);
+            if (!substancia) return;
+            
+            // Atualizar modal com os dados da substância
+            document.getElementById('substanciaModalLabel').textContent = substancia.nome;
+            document.getElementById('substanciaImagem').src = substancia.imagem;
+            document.getElementById('substanciaCategoria').textContent = substancia.categoria;
+            document.getElementById('substanciaDescricao').textContent = substancia.descricao;
+            document.getElementById('substanciaUso').textContent = substancia.uso;
+            
+            // Renderizar efeitos como lista
+            const efeitosContainer = document.getElementById('substanciaEfeitos');
+            efeitosContainer.innerHTML = '<ul>' + substancia.efeitos.map(e => `<li>${e}</li>`).join('') + '</ul>';
+            
+            // Renderizar overdose
+            const overdoseContainer = document.getElementById('substanciaOverdose');
+            overdoseContainer.innerHTML = `<p>${substancia.overdose}</p>`;
+            
+            // Renderizar ajuda
+            const ajudaContainer = document.getElementById('substanciaAjuda');
+            ajudaContainer.innerHTML = `<p>${substancia.ajuda}</p>`;
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('substanciaModal'));
+            modal.show();
+        }
+
+        // Configurar filtros
+        document.getElementById('aplicarFiltrosSubstancias').addEventListener('click', function() {
+            const categoria = document.getElementById('categoriaSubstancia').value;
+            const busca = document.getElementById('buscaSubstancia').value;
+            renderizarSubstancias(categoria, busca, 1); // Sempre voltar para a página 1 ao aplicar filtros
+        });
+
+        // Inicializar substâncias quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarSubstancias('all', '', 1);
+            
+            // Permitir fechar o modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('substanciaModal').classList.contains('show')) {
+                    bootstrap.Modal.getInstance(document.getElementById('substanciaModal')).hide();
+                }
+            });
+            
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+            
+            console.log('Página de substâncias carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>

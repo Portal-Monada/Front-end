@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca de Vídeos | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Content Cards */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Estilos específicos para vídeos */
+        .videos-section {
+            background-color: var(--background-light);
+            padding-bottom: 3rem;
+            padding-top: 3rem;
+        }
+
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .filter-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .video-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #000;
+            cursor: pointer;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .video-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .list-group-item {
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .list-group-item:hover {
+            background-color: var(--background-light);
+            border-left-color: var(--accent-color);
+        }
+
+        .form-check-input:checked + span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* Modal de vídeo */
+        .video-modal .modal-dialog {
+            max-width: min(95vw, 1200px);
+            max-height: 95vh;
+            margin: 2.5vh auto;
+        }
+
+        .video-modal .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            max-height: 95vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-modal .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+            flex-shrink: 0;
+            padding: 1rem 1.5rem;
+        }
+
+        .video-modal .modal-body {
+            padding: 0;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: min(56.25%, calc(95vh - 200px)); /* Responsivo na vertical */
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info-content {
+            padding: 1.5rem;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .video-modal .modal-footer {
+            flex-shrink: 0;
+            border-top: 1px solid #dee2e6;
+        }
+
+        /* Botões */
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Paginação */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .page-item {
+            margin: 0 0.25rem;
+        }
+        
+        .page-link {
+            display: block;
+            padding: 0.45rem 0.85rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background-color: var(--background-light);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .video-modal .modal-body {
+                padding: 0;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="videos.html"><i class="fas fa-video me-1"></i>Vídeos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html"><i class="fas fa-book me-1"></i>Recursos</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Biblioteca de Vídeos Educativos</h1>
+                    <p class="slide-in">Conteúdo audiovisual de qualidade para promover saúde mental e bem-estar emocional.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#videos" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-video me-2"></i>Explorar Vídeos
+                        </a>
+                        <a href="#como-funciona" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-info-circle me-2"></i>Como Funciona
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-play-circle" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section id="como-funciona" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Nossa Biblioteca de Vídeos</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="card-title">Conteúdo Educativo</h3>
+                            <p class="card-text">Vídeos produzidos por especialistas em saúde mental com informações confiáveis e baseadas em evidências.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <h3 class="card-title">Fácil Navegação</h3>
+                            <p class="card-text">Filtre vídeos por tema, duração e nível de conhecimento para encontrar exatamente o que precisa.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 class="card-title">Diversas Durações</h3>
+                            <p class="card-text">Desde pílulas de conhecimento rápidas até aulas completas, para se encaixar na sua rotina.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-bookmark"></i>
+                            </div>
+                            <h3 class="card-title">Salve Favoritos</h3>
+                            <p class="card-text">Crie sua lista pessoal de vídeos favoritos para assistir quando quiser (após login).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vídeos Section -->
+    <section id="videos" class="videos-section">
+        <div class="container">
+            <h2 class="section-title mb-3">Nossa Coleção de Vídeos</h2>
+            <p class="text-center mb-5">Assista a conteúdos educativos sobre saúde mental e bem-estar emocional</p>
+            
+            <div class="row">
+                <!-- Filtros e Busca -->
+                <div class="col-lg-3 mb-4">
+                    <div class="card search-filter-card">
+                        <div class="card-body">
+                            <h4 class="filter-title mb-3">
+                                <i class="fas fa-filter me-2"></i>Filtrar Vídeos
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Buscar:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="buscaVideo" placeholder="Pesquisar...">
+                                    <button class="btn btn-primary-custom" type="button" id="botaoBusca">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Categoria:</label>
+                                <select class="form-select" id="categoriaVideo">
+                                    <option value="all">Todas</option>
+                                    <option value="ansiedade">Ansiedade</option>
+                                    <option value="depressao">Depressão</option>
+                                    <option value="estresse">Estresse</option>
+                                    <option value="autocuidado">Autocuidado</option>
+                                    <option value="relacionamentos">Relacionamentos</option>
+                                    <option value="mindfulness">Mindfulness</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Duração:</label>
+                                <select class="form-select" id="duracaoVideo">
+                                    <option value="all">Qualquer duração</option>
+                                    <option value="short">Até 5 minutos</option>
+                                    <option value="medium">5-15 minutos</option>
+                                    <option value="long">Mais de 15 minutos</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nível:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="iniciante" id="nivelIniciante" checked>
+                                    <label class="form-check-label" for="nivelIniciante">
+                                        Iniciante
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="intermediario" id="nivelIntermediario" checked>
+                                    <label class="form-check-label" for="nivelIntermediario">
+                                        Intermediário
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="avancado" id="nivelAvancado" checked>
+                                    <label class="form-check-label" for="nivelAvancado">
+                                        Avançado
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary-custom w-100" id="aplicarFiltrosVideos">
+                                <i class="fas fa-filter me-2"></i>Aplicar Filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Vídeos -->
+                <div class="col-lg-9">
+                    <div class="row g-4" id="listaVideos">
+                        <!-- Vídeos serão carregados aqui via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Paginação -->
+                <div class="pagination-container" id="paginacaoContainer">
+                    <ul class="pagination" id="paginacao">
+                        <!-- Paginação será gerada via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal do Vídeo -->
+    <div class="modal fade video-modal" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Assistir Vídeo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="video-container" id="videoContainer">
+                        <!-- O player de vídeo será inserido aqui -->
+                    </div>
+                    <div class="p-4">
+                        <h4 id="videoModalTitulo"></h4>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="text-muted" id="videoModalAutor"></span>
+                            <span class="text-muted" id="videoModalData"></span>
+                        </div>
+                        <p id="videoModalDescricao" class="mb-0"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Fechar
+                    </button>
+                    <button type="button" class="btn btn-primary-custom" id="botaoFavorito">
+                        <i class="far fa-bookmark me-2"></i>Adicionar aos Favoritos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="videos.html">Vídeos</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="recursos.html">Artigos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dados dos vídeos (simulados)
+        const videosData = [
+            {
+                id: 1,
+                titulo: "Entendendo a Ansiedade: Guia para Iniciantes",
+                descricao: "Neste vídeo, a psicóloga Dra. Ana Silva explica os conceitos básicos da ansiedade, seus sintomas e estratégias iniciais para lidar com ela.",
+                categoria: "ansiedade",
+                duracao: "short",
+                nivel: "iniciante",
+                autor: "Dra. Ana Silva",
+                data: "15/03/2025",
+                url: "https://www.youtube.com/embed/5NvR33f5gLw",
+                thumbnail: "https://www.yourcounselling.ca/wp-content/uploads/2020/08/sept-10-thegem-blog-default.jpeg",
+                visualizacoes: 12453,
+                tempo: "4:32"
+            },
+            {
+                id: 2,
+                titulo: "Técnicas Avançadas de Mindfulness",
+                descricao: "O especialista em mindfulness João Pereira ensina técnicas avançadas para reduzir o estresse e aumentar o foco no presente.",
+                categoria: "mindfulness",
+                duracao: "long",
+                nivel: "avancado",
+                autor: "João Pereira",
+                data: "22/02/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_2",
+                thumbnail: "https://www.mindful.org/content/uploads/Meditation-Mindfulness-1-scaled.jpg",
+                visualizacoes: 8765,
+                tempo: "18:45"
+            },
+            {
+                id: 3,
+                titulo: "Depressão: Mitos e Verdades",
+                descricao: "O psiquiatra Dr. Carlos Mendes desmistifica conceitos errados sobre depressão e apresenta os tratamentos mais eficazes atualmente.",
+                categoria: "depressao",
+                duracao: "medium",
+                nivel: "intermediario",
+                autor: "Dr. Carlos Mendes",
+                data: "10/01/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_3",
+                thumbnail: "https://assets.theinnerhour.com/bloguploads/Depression%20causes%20types%20and%20signs1594105476385.jpg",
+                visualizacoes: 15678,
+                tempo: "12:20"
+            },
+            {
+                id: 4,
+                titulo: "Autocuidado para Saúde Mental",
+                descricao: "A terapeuta ocupacional Mariana Costa compartilha rotinas simples de autocuidado que podem melhorar significativamente seu bem-estar mental.",
+                categoria: "autocuidado",
+                duracao: "short",
+                nivel: "iniciante",
+                autor: "Mariana Costa",
+                data: "05/03/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_4",
+                thumbnail: "https://s39613.pcdn.co/wp-content/uploads/2024/04/02.19_mental-health-critical-framework.jpg",
+                visualizacoes: 9876,
+                tempo: "5:15"
+            },
+            {
+                id: 5,
+                titulo: "Gerenciando o Estresse no Trabalho",
+                descricao: "O psicólogo organizacional Rafael Lima apresenta estratégias comprovadas para reduzir o estresse no ambiente de trabalho.",
+                categoria: "estresse",
+                duracao: "medium",
+                nivel: "intermediario",
+                autor: "Rafael Lima",
+                data: "28/02/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_5",
+                thumbnail: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/3662/images/c56faff-bce-d6b-d787-0f2f485e0f_BrainFirst_Institute_Stress_At_Work.jpg",
+                visualizacoes: 11234,
+                tempo: "9:50"
+            },
+            {
+                id: 6,
+                titulo: "Comunicação em Relacionamentos Saudáveis",
+                descricao: "A terapeuta de casais Fernanda Almeida ensina técnicas de comunicação que fortalecem relacionamentos e promovem saúde emocional.",
+                categoria: "relacionamentos",
+                duracao: "long",
+                nivel: "intermediario",
+                autor: "Fernanda Almeida",
+                data: "14/01/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_6",
+                thumbnail: "https://neuroleadership.com/wp-content/uploads/2023/03/Three-Steps-for-Communicating-Better-According-to-Neuroscience-.png",
+                visualizacoes: 7654,
+                tempo: "22:10"
+            },
+            {
+                id: 7,
+                titulo: "Exercícios de Respiração para Ansiedade",
+                descricao: "Aprenda técnicas simples de respiração que podem ajudar a controlar crises de ansiedade e promover relaxamento imediato.",
+                categoria: "ansiedade",
+                duracao: "short",
+                nivel: "iniciante",
+                autor: "Dra. Ana Silva",
+                data: "08/03/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_7",
+                thumbnail: "https://gladiatortherapeutics.com/wp-content/uploads/2024/08/Cellular-Respiration.jpg",
+                visualizacoes: 14321,
+                tempo: "3:45"
+            },
+            {
+                id: 8,
+                titulo: "Neurociência da Meditação",
+                descricao: "O neurocientista Dr. Pedro Santos explica como a meditação altera o cérebro e pode melhorar a saúde mental a longo prazo.",
+                categoria: "mindfulness",
+                duracao: "long",
+                nivel: "avancado",
+                autor: "Dr. Pedro Santos",
+                data: "20/02/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_8",
+                thumbnail: "https://media.springernature.com/w580h326/nature-cms/uploads/collections/A97603_SREP_TOP_100_NEUROSCI_HERO_580x326px-b834fe7c2c0f7a2082d6501e2a5b8433.jpg",
+                visualizacoes: 6543,
+                tempo: "25:30"
+            },
+            {
+                id: 9,
+                titulo: "Identificando Sinais de Depressão",
+                descricao: "Saiba reconhecer os principais sinais de depressão em você mesmo e em pessoas próximas, e quando buscar ajuda profissional.",
+                categoria: "depressao",
+                duracao: "medium",
+                nivel: "iniciante",
+                autor: "Dr. Carlos Mendes",
+                data: "12/01/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_9",
+                thumbnail: "https://www.newsnationnow.com/wp-content/uploads/sites/108/2022/09/GettyImages-1310564713-1.jpg",
+                visualizacoes: 10987,
+                tempo: "8:15"
+            },
+            {
+                id: 10,
+                titulo: "Rotina Noturna para Melhor Sono",
+                descricao: "Descubra hábitos noturnos que podem melhorar a qualidade do seu sono e, consequentemente, sua saúde mental.",
+                categoria: "autocuidado",
+                duracao: "short",
+                nivel: "iniciante",
+                autor: "Mariana Costa",
+                data: "03/03/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_10",
+                thumbnail: "https://news.northwestern.edu/assets/Stories/2022/12/sleeping1940__FitMaxWzk3MCw2NTBd.jpg",
+                visualizacoes: 8765,
+                tempo: "4:50"
+            },
+            {
+                id: 11,
+                titulo: "Estresse Pós-Traumático: Entendendo e Tratando",
+                descricao: "A psicóloga especialista em trauma Dra. Luiza Fernandes explica o TEPT e as abordagens terapêuticas mais eficazes.",
+                categoria: "estresse",
+                duracao: "long",
+                nivel: "avancado",
+                autor: "Dra. Luiza Fernandes",
+                data: "25/02/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_11",
+                thumbnail: "https://cdn.shedefined.com.au/wp-content/uploads/2022/02/26163045/How-to-heal-trauma-without-revisiting-traumatic-events-960x540-1.jpg",
+                visualizacoes: 5432,
+                tempo: "19:20"
+            },
+            {
+                id: 12,
+                titulo: "Limites Saudáveis em Relacionamentos",
+                descricao: "Aprenda a estabelecer e manter limites saudáveis em relacionamentos pessoais e profissionais para proteger sua saúde mental.",
+                categoria: "relacionamentos",
+                duracao: "medium",
+                nivel: "intermediario",
+                autor: "Fernanda Almeida",
+                data: "17/01/2025",
+                url: "https://www.youtube.com/embed/VIDEO_ID_12",
+                thumbnail: "https://images.squarespace-cdn.com/content/v1/547bd55ce4b0680f8d6e015e/1631759952495-MJD6U2BB1OS05ZE1CONN/relationship.png",
+                visualizacoes: 7654,
+                tempo: "11:35"
+            }
+        ];
+
+        // Variáveis de estado para paginação
+        let videoAtual = null;
+        let currentPage = 1;
+        const itemsPerPage = 6; // Número de itens por página
+
+        // Função para renderizar os vídeos
+        function renderizarVideos(filtroCategoria = 'all', filtroDuracao = 'all', filtroNiveis = ['iniciante', 'intermediario', 'avancado'], termoBusca = '', page = 1) {
+            const container = document.getElementById('listaVideos');
+            const paginationContainer = document.getElementById('paginacao');
+            
+            container.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            
+            const videosFiltrados = videosData.filter(v => {
+                const categoriaMatch = filtroCategoria === 'all' || v.categoria === filtroCategoria;
+                const duracaoMatch = filtroDuracao === 'all' || v.duracao === filtroDuracao;
+                const nivelMatch = filtroNiveis.includes(v.nivel);
+                const buscaMatch = termoBusca === '' || 
+                    v.titulo.toLowerCase().includes(termoBusca.toLowerCase()) || 
+                    v.descricao.toLowerCase().includes(termoBusca.toLowerCase()) ||
+                    v.autor.toLowerCase().includes(termoBusca.toLowerCase());
+                
+                return categoriaMatch && duracaoMatch && nivelMatch && buscaMatch;
+            });
+            
+            if (videosFiltrados.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-video-slash fa-3x mb-3" style="color: var(--accent-color);"></i>
+                        <h4>Nenhum vídeo encontrado</h4>
+                        <p class="text-muted">Tente ajustar os filtros ou termos de busca</p>
+                    </div>
+                `;
+                document.getElementById('paginacaoContainer').style.display = 'none';
+                return;
+            }
+            
+            // Calcular itens para a página atual
+            const totalPages = Math.ceil(videosFiltrados.length / itemsPerPage);
+            currentPage = Math.min(Math.max(page, 1), totalPages); // Garantir que a página está dentro dos limites
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, videosFiltrados.length);
+            const videosPagina = videosFiltrados.slice(startIndex, endIndex);
+            
+            // Renderizar vídeos da página atual
+            videosPagina.forEach(v => {
+                const duracaoText = {
+                    'short': 'Curto',
+                    'medium': 'Médio',
+                    'long': 'Longo'
+                }[v.duracao] || v.duracao;
+                
+                const categoriaText = {
+                    'ansiedade': 'Ansiedade',
+                    'depressao': 'Depressão',
+                    'estresse': 'Estresse',
+                    'autocuidado': 'Autocuidado',
+                    'relacionamentos': 'Relacionamentos',
+                    'mindfulness': 'Mindfulness'
+                }[v.categoria] || v.categoria;
+                
+                const nivelText = {
+                    'iniciante': 'Iniciante',
+                    'intermediario': 'Intermediário',
+                    'avancado': 'Avançado'
+                }[v.nivel] || v.nivel;
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="card content-card h-100">
+                        <div class="video-card">
+                            <div class="video-thumbnail assistir-video" data-id="${v.id}">
+                                <img src="${v.thumbnail}" alt="${v.titulo}">
+                                <div class="play-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <span class="video-duration">${v.tempo}</span>
+                            </div>
+                            <div class="video-info">
+                                <h5 class="video-title">${v.titulo}</h5>
+                                <div class="video-meta">
+                                    <span><i class="fas fa-user me-1"></i>${v.autor}</span>
+                                    <span><i class="fas fa-eye me-1"></i>${v.visualizacoes.toLocaleString()}</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 justify-content-between mb-2">
+                                    <span class="badge bg-primary">${categoriaText}</span>
+                                    <span class="badge bg-secondary">${nivelText}</span>
+                                </div>
+                                <p class="video-description">${v.descricao}</p>
+                                <button class="btn btn-primary-custom w-100 mt-2 assistir-video" data-id="${v.id}">
+                                    <i class="fas fa-play me-2"></i>Assistir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Configurar eventos dos botões
+            document.querySelectorAll('.assistir-video').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    assistirVideo(id);
+                });
+            });
+            
+            // Renderizar paginação
+            document.getElementById('paginacaoContainer').style.display = 'flex';
+            
+            // Botão Anterior
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#" aria-label="Anterior">&laquo;</a>`;
+            prevItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    renderizarVideos(filtroCategoria, filtroDuracao, filtroNiveis, termoBusca, currentPage - 1);
+                }
+            });
+            paginationContainer.appendChild(prevItem);
+            
+            // Números das páginas
+            const maxVisiblePages = 5; // Número máximo de páginas visíveis na paginação
+            let startPage, endPage;
+            
+            if (totalPages <= maxVisiblePages) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+                const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+                
+                if (currentPage <= maxPagesBeforeCurrent) {
+                    startPage = 1;
+                    endPage = maxVisiblePages;
+                } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+                    startPage = totalPages - maxVisiblePages + 1;
+                    endPage = totalPages;
+                } else {
+                    startPage = currentPage - maxPagesBeforeCurrent;
+                    endPage = currentPage + maxPagesAfterCurrent;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarVideos(filtroCategoria, filtroDuracao, filtroNiveis, termoBusca, i);
+                });
+                paginationContainer.appendChild(pageItem);
+            }
+            
+            // Botão Próximo
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#" aria-label="Próximo">&raquo;</a>`;
+            nextItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    renderizarVideos(filtroCategoria, filtroDuracao, filtroNiveis, termoBusca, currentPage + 1);
+                }
+            });
+            paginationContainer.appendChild(nextItem);
+        }
+
+        // Função para assistir um vídeo
+        function assistirVideo(id) {
+            videoAtual = videosData.find(v => v.id === id);
+            if (!videoAtual) return;
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('videoModal'));
+            document.getElementById('videoModalLabel').textContent = videoAtual.titulo;
+            document.getElementById('videoModalTitulo').textContent = videoAtual.titulo;
+            document.getElementById('videoModalAutor').textContent = `Por ${videoAtual.autor}`;
+            document.getElementById('videoModalData').textContent = `Publicado em ${videoAtual.data}`;
+            document.getElementById('videoModalDescricao').textContent = videoAtual.descricao;
+            
+            // Configurar player de vídeo
+            const videoContainer = document.getElementById('videoContainer');
+            videoContainer.innerHTML = `
+                <iframe src="${videoAtual.url}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            `;
+            
+            // Configurar botão de favoritos
+            const botaoFavorito = document.getElementById('botaoFavorito');
+            botaoFavorito.innerHTML = '<i class="far fa-bookmark me-2"></i>Adicionar aos Favoritos';
+            botaoFavorito.onclick = function() {
+                alert('Faça login para adicionar vídeos aos seus favoritos.');
+                // Na implementação real, aqui você enviaria os dados para o servidor
+            };
+            
+            modal.show();
+        }
+
+        // Fechar modal e limpar player
+        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+            document.getElementById('videoContainer').innerHTML = '';
+        });
+
+        // Configurar filtros
+        document.getElementById('aplicarFiltrosVideos').addEventListener('click', function() {
+            const categoria = document.getElementById('categoriaVideo').value;
+            const duracao = document.getElementById('duracaoVideo').value;
+            const termoBusca = document.getElementById('buscaVideo').value;
+            
+            // Obter níveis selecionados
+            const niveis = [];
+            if (document.getElementById('nivelIniciante').checked) niveis.push('iniciante');
+            if (document.getElementById('nivelIntermediario').checked) niveis.push('intermediario');
+            if (document.getElementById('nivelAvancado').checked) niveis.push('avancado');
+            
+            renderizarVideos(categoria, duracao, niveis, termoBusca, 1);
+        });
+
+        // Permitir busca ao pressionar Enter
+        document.getElementById('buscaVideo').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('aplicarFiltrosVideos').click();
+            }
+        });
+
+        // Botão de busca
+        document.getElementById('botaoBusca').addEventListener('click', function() {
+            document.getElementById('aplicarFiltrosVideos').click();
+        });
+
+        // Inicializar vídeos quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarVideos('all', 'all', ['iniciante', 'intermediario', 'avancado'], '', 1);
+            
+            // Permitir fechar o modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('videoModal').classList.contains('show')) {
+                    bootstrap.Modal.getInstance(document.getElementById('videoModal')).hide();
+                }
+            });
+            
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+            
+            console.log('Página de vídeos carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>

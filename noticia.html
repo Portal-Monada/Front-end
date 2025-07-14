@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícia - Portal Mônada</title>
+    <!-- Inclua os mesmos estilos e scripts do index.html -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .news-full-container {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .news-full-image {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1054;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--background-light);
+            padding: 3rem 0;
+        }
+
+        .search-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: none;
+        }
+
+        .search-input {
+            border: 2px solid #E9ECEF;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+
+        .search-btn {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .filter-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .filter-tag:hover {
+            background: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .filter-tag.active {
+            background: var(--primary-color);
+        }
+
+        /* Content Cards */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* News Section */
+        .news-section {
+            background-color: var(--background-light);
+            padding-bottom: 2.5rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .news-date {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .news-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .news-body {
+            padding: 1.5rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .news-excerpt {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .news-meta i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .news-search-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .news-filter-btn {
+            background: white;
+            border: 1px solid #dee2e6;
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-filter-btn:hover, .news-filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .no-news-found {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+        
+        /* Melhorando a paginação */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .pagination .page-item .page-link {
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding-bottom: 3rem;
+            background-color: var(--background-light);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: calc(90vh - 60px); /* Espaço para a legenda */
+            width: auto;
+            height: auto;
+            object-fit: contain; /* Mantém a proporção sem distorcer */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-color);
+        }
+
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            max-width: 80%;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .modal-close {
+                top: 10px;
+                right: 20px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Auth Section */
+        .auth-section {
+            background: var(--background-light);
+            padding: 3rem 0;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Guia de Serviços */
+        .services-section {
+            padding-bottom: 3rem;
+            background-color: var(--background-light);
+        }
+
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .filter-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .map-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .leaflet-control-attribution {
+            display: none;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .service-type {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .service-meta i {
+            color: var(--accent-color);
+            width: 20px;
+            text-align: center;
+            margin-right: 0.3rem;
+        }
+
+        /* Estilos para Depoimentos */
+        .depoiments-section {
+            padding-bottom: 3rem;
+        }
+
+        .depoimento-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .depoimento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .depoimento-text {
+            font-style: italic;
+            color: var(--text-dark);
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .depoimento-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 3rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .depoimento-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .depoimento-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .depoimento-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .depoimento-category {
+            position: absolute;
+            top: 10.5rem;
+            right: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .depoimento-card {
+                padding: 1.5rem;
+            }
+            
+            .depoimento-text {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Estilos para a seção de agendamento */
+        #agendamento {
+            background-color: #f8f9fa;
+        }
+
+        .profissional-card {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .profissional-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .profissional-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .page-item.active .page-link {
+            background-color: #2E5266;
+            border-color: #2E5266;
+        }
+
+        .page-link {
+            color: #2E5266;
+            margin: 0 5px;
+            border-radius: 5px !important;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .search-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-shield-alt me-1"></i>Prevenção
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Prevenção Primária</a></li>
+                                <li><a class="dropdown-item" href="#">Prevenção Secundária</a></li>
+                                <li><a class="dropdown-item" href="#">Prevenção Terciária</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-gamepad me-1"></i>Dependências
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Álcool e Drogas</a></li>
+                                <li><a class="dropdown-item" href="#">Jogos Virtuais</a></li>
+                                <li><a class="dropdown-item" href="#">Comportamentais</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-heart me-1"></i>Saúde Mental</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="curso.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="monada-portal.html"><i class="fas fa-graduation-cap me-1"></i>Recursos</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo da notícia -->
+    <div class="container news-full-container">
+        <div class="news-full-header">
+            <h1 class="news-full-title" id="newsTitle">Título da Notícia</h1>
+            <div class="news-full-meta">
+                <span id="newsDate" class="me-3"><i class="fas fa-calendar-alt me-1"></i></span>
+                <span id="newsCategory" class="me-3"><i class="fas fa-tag me-1"></i></span>
+                <span id="newsReadTime"><i class="fas fa-clock me-1"></i></span>
+            </div>
+            <img id="newsImage" class="news-full-image" src="" alt="">
+        </div>
+        
+        <div id="newsContent" class="news-full-content">
+            <!-- O conteúdo será inserido aqui pelo JavaScript -->
+        </div>
+        
+        <a href="index.html#news" class="back-to-news">
+            <i class="fas fa-arrow-left me-1"></i> Voltar para as notícias
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="library.html">Artigos</a></li>
+                        <li><a href="videos.html">Vídeos</a></li>
+                        <li><a href="substances.html">Substâncias</a></li>
+                        <li><a href="glossary.html">Glossário</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obter o ID da notícia da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+            
+            // Carregar os dados da notícia 
+            const newsData = [
+                {
+                    id: 1,
+                    title: "Novo estudo revela impacto da pandemia na saúde mental dos jovens",
+                    excerpt: "Pesquisa nacional mostra aumento de 40% nos casos de ansiedade e depressão entre adolescentes nos últimos 2 anos...",
+                    content: `
+                        <h2>Impacto da Pandemia na Saúde Mental Juvenil</h2>
+                        <p>Um estudo abrangente realizado em todo o país revelou que os casos de ansiedade e depressão entre adolescentes aumentaram significativamente durante a pandemia. Os pesquisadores analisaram dados de mais de 10.000 jovens entre 12 e 18 anos.</p>
+                        
+                        <h3>Principais Descobertas</h3>
+                        <ul>
+                            <li>Aumento de 40% nos sintomas de ansiedade</li>
+                            <li>35% mais casos de depressão moderada a grave</li>
+                            <li>60% relataram piora na qualidade do sono</li>
+                            <li>45% sentiram aumento da solidão</li>
+                        </ul>
+                        
+                        <p>Segundo a Dra. Ana Silva, coordenadora da pesquisa: "Os dados mostram a urgência de políticas públicas voltadas para a saúde mental dos jovens. Precisamos agir agora para prevenir consequências a longo prazo."</p>
+                        
+                        <p>O estudo também identificou fatores protetores, como a manutenção de rotinas, atividades físicas regulares e suporte familiar consistente.</p>
+                    `,
+                    slug: "impacto-pandemia-saude-mental-jovens",
+                    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "15/06/2023",
+                    category: "research",
+                    readTime: "5 min leitura",
+                    views: "1.2k"
+                },
+                {
+                    id: 2,
+                    title: "Workshop gratuito sobre prevenção ao uso de álcool nas escolas",
+                    excerpt: "Programa educacional será realizado em 15 cidades brasileiras com foco em estratégias de prevenção primária...",
+                    content: `
+                        <h2>Workshop Nacional de Prevenção ao Álcool</h2>
+                        <p>O Ministério da Saúde em parceria com instituições de ensino promove workshop gratuito sobre prevenção ao uso de álcool entre adolescentes. O evento ocorrerá em 15 capitais brasileiras durante o mês de junho.</p>
+                        
+                        <h3>Conteúdo Programático</h3>
+                        <ul>
+                            <li>Estratégias de prevenção primária</li>
+                            <li>Como abordar o tema em sala de aula</li>
+                            <li>Identificação de sinais precoces</li>
+                            <li>O papel da família na prevenção</li>
+                        </ul>
+                        
+                        <p>As inscrições podem ser feitas pelo site do Ministério da Saúde ou nas secretarias das escolas participantes.</p>
+                    `,
+                    slug: "workshop-prevencao-alcool-escolas",
+                    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "10/06/2023",
+                    category: "events",
+                    readTime: "3 min leitura",
+                    views: "890"
+                },
+                {
+                    id: 3,
+                    title: "Terapia inovadora mostra resultados promissores no tratamento de dependência química",
+                    excerpt: "Método combina terapia cognitivo-comportamental com realidade virtual e apresenta taxa de sucesso de 68% em estudo preliminar...",
+                    content: `
+                        <h2>Terapia Combinada para Dependência Química</h2>
+                        <p>Pesquisadores da Universidade de São Paulo desenvolveram um método que combina terapia cognitivo-comportamental com realidade virtual para tratamento de dependência química.</p>
+                        
+                        <h3>Resultados do Estudo</h3>
+                        <p>Em estudo preliminar com 120 pacientes, a nova técnica apresentou:</p>
+                        <ul>
+                            <li>68% de taxa de sucesso na abstinência</li>
+                            <li>Redução de 75% nos sintomas de fissura</li>
+                            <li>Melhora significativa na qualidade de vida</li>
+                        </ul>
+                        
+                        <p>A técnica está em fase de testes ampliados antes de ser disponibilizada no SUS.</p>
+                    `,
+                    slug: "terapia-inovadora-dependencia-quimica",
+                    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "05/06/2023",
+                    category: "treatment",
+                    readTime: "7 min leitura",
+                    views: "2.4k"
+                },
+                {
+                    id: 4,
+                    title: "Como identificar sinais de dependência de jogos virtuais em adolescentes",
+                    excerpt: "Especialista lista os principais sinais de alerta e estratégias para os pais lidarem com o uso excessivo de jogos eletrônicos...",
+                    content: `
+                        <h2>Identificando o Uso Problemático de Jogos</h2>
+                        <p>Especialistas alertam para os sinais de dependência de jogos virtuais em adolescentes, problema reconhecido pela OMS como transtorno mental.</p>
+                        
+                        <h3>Sinais de Alerta</h3>
+                        <ul>
+                            <li>Preocupação excessiva com jogos</li>
+                            <li>Irritabilidade quando não está jogando</li>
+                            <li>Queda no rendimento escolar</li>
+                            <li>Isolamento social</li>
+                            <li>Alterações no padrão de sono</li>
+                        </ul>
+                        
+                        <p>Psicólogos recomendam estabelecer limites claros e buscar ajuda profissional quando necessário.</p>
+                    `,
+                    slug: "sinais-dependencia-jogos-virtuais-adolescentes",
+                    image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "28/05/2023",
+                    category: "gaming",
+                    readTime: "4 min leitura",
+                    views: "1.8k"
+                },
+                {
+                    id: 5,
+                    title: "Guia completo: Como apoiar um familiar com problemas de saúde mental",
+                    excerpt: "Psicóloga explica estratégias para oferecer suporte adequado sem comprometer a própria saúde emocional...",
+                    content: `
+                        <h2>Apoiando Familiares com Saúde Mental</h2>
+                        <p>Especialista explica como oferecer suporte adequado a familiares com problemas psicológicos sem comprometer a própria saúde emocional.</p>
+                        
+                        <h3>Principais Recomendações</h3>
+                        <ul>
+                            <li>Mantenha a comunicação aberta e sem julgamentos</li>
+                            <li>Incentive a busca por ajuda profissional</li>
+                            <li>Estabeleça limites saudáveis</li>
+                            <li>Cuide da sua própria saúde mental</li>
+                            <li>Participe de grupos de apoio para familiares</li>
+                        </ul>
+                        
+                        <p>Lembre-se: você não precisa ter todas as respostas, apenas estar presente.</p>
+                    `,
+                    slug: "guia-apoio-familiar-saude-mental",
+                    image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "20/05/2023",
+                    category: "mental-health",
+                    readTime: "6 min leitura",
+                    views: "3.1k"
+                },
+                {
+                    id: 6,
+                    title: "Novas políticas públicas para redução de danos são aprovadas em 5 estados",
+                    excerpt: "Medidas incluem ampliação de centros de atendimento e programas de educação comunitária sobre uso de substâncias...",
+                    content: `
+                        <h2>Ampliação das Políticas de Redução de Danos</h2>
+                        <p>Cinco estados brasileiros aprovaram novas políticas públicas para redução de danos relacionados ao uso de substâncias psicoativas.</p>
+                        
+                        <h3>Medidas Implementadas</h3>
+                        <ul>
+                            <li>Ampliação de CAPS AD em regiões carentes</li>
+                            <li>Programas de educação comunitária</li>
+                            <li>Treinamento de agentes de saúde</li>
+                            <li>Distribuição de kits de redução de danos</li>
+                            <li>Criação de centros de acolhimento noturno</li>
+                        </ul>
+                        
+                        <p>As medidas buscam abordar o problema de forma humanizada e baseada em evidências científicas.</p>
+                    `,
+                    slug: "politicas-publicas-reducao-danos",
+                    image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "12/05/2023",
+                    category: "prevention",
+                    readTime: "5 min leitura",
+                    views: "1.5k"
+                },
+                {
+                    id: 7,
+                    title: "Programa de prevenção ao uso de drogas nas escolas tem resultados positivos",
+                    excerpt: "Iniciativa em São Paulo reduziu em 30% o uso experimental de substâncias entre adolescentes...",
+                    content: `
+                        <h2>Programa Educacional de Prevenção</h2>
+                        <p>Iniciativa piloto em escolas de São Paulo reduziu em 30% o uso experimental de substâncias entre adolescentes.</p>
+                        
+                        <h3>Metodologia do Programa</h3>
+                        <ul>
+                            <li>Abordagem científica e não moralista</li>
+                            <li>Envolvimento de alunos como multiplicadores</li>
+                            <li>Atividades interativas e dinâmicas</li>
+                            <li>Envolvimento da comunidade escolar</li>
+                        </ul>
+                        
+                        <p>O programa será expandido para outras 200 escolas no próximo ano letivo.</p>
+                    `,
+                    slug: "programa-prevencao-drogas-escolas-resultados",
+                    image: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "08/05/2023",
+                    category: "prevention",
+                    readTime: "4 min leitura",
+                    views: "1.1k"
+                },
+                {
+                    id: 8,
+                    title: "Nova técnica de meditação auxilia no tratamento da ansiedade",
+                    excerpt: "Estudo mostra que método reduz sintomas em 60% dos participantes após 8 semanas de prática...",
+                    content: `
+                        <h2>Meditação para Controle da Ansiedade</h2>
+                        <p>Pesquisa demonstra eficácia de nova técnica de meditação no tratamento de transtornos de ansiedade.</p>
+                        
+                        <h3>Benefícios Comprovados</h3>
+                        <ul>
+                            <li>Redução de 60% nos sintomas de ansiedade</li>
+                            <li>Melhora na qualidade do sono</li>
+                            <li>Diminuição da frequência de crises</li>
+                            <li>Aumento da capacidade de concentração</li>
+                        </ul>
+                        
+                        <p>A técnica combina elementos de mindfulness com respiração controlada e pode ser praticada em casa após treinamento inicial.</p>
+                    `,
+                    slug: "tecnica-meditacao-tratamento-ansiedade",
+                    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                    date: "02/05/2023",
+                    category: "treatment",
+                    readTime: "5 min leitura",
+                    views: "2.7k"
+                }
+            ];
+            
+            const newsItem = newsData.find(item => item.id == newsId);
+            
+            if (newsItem) {
+                // Preencher os dados da notícia
+                document.getElementById('newsTitle').textContent = newsItem.title;
+                document.getElementById('newsDate').textContent += newsItem.date;
+                document.getElementById('newsCategory').textContent += getCategoryName(newsItem.category);
+                document.getElementById('newsReadTime').textContent += newsItem.readTime;
+                document.getElementById('newsImage').src = newsItem.image;
+                document.getElementById('newsImage').alt = newsItem.title;
+                document.getElementById('newsContent').innerHTML = newsItem.content;
+                
+                // Atualizar o título da página
+                document.title = `${newsItem.title} - Portal Mônada`;
+            } else {
+                // Se a notícia não for encontrada
+                document.getElementById('newsContent').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Notícia não encontrada. <a href="index.html#news">Voltar para a lista de notícias</a>.
+                    </div>
+                `;
+            }
+            
+            function getCategoryName(category) {
+                const categories = {
+                    'prevention': 'Prevenção',
+                    'treatment': 'Tratamento',
+                    'research': 'Pesquisa',
+                    'events': 'Eventos',
+                    'alcohol': 'Álcool',
+                    'drugs': 'Drogas',
+                    'gaming': 'Jogos',
+                    'mental-health': 'Saúde Mental'
+                };
+                return categories[category] || category;
+            }
+        });
+    </script>
+</body>
+</html>

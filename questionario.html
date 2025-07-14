@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionários de Saúde Mental | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Content Cards */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Estilos específicos para questionários */
+        .testes-section {
+            background-color: var(--background-light);
+            padding-bottom: 3rem;
+            padding-top: 3rem;
+        }
+
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .filter-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .teste-card .card-icon {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+        }
+
+        .list-group-item {
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .list-group-item:hover {
+            background-color: var(--background-light);
+            border-left-color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .form-check-input:checked + span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .form-check-input:hover {
+            cursor: pointer;
+        }
+
+        /* Modal de questionário */
+        .questionario-modal .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .questionario-modal .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+
+        .questionario-modal .modal-body {
+            padding: 2rem;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .progress-bar {
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        /* Resultado */
+        .resultado-card {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Botões */
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Adicione estes estilos ao seu CSS existente */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .page-item {
+            margin: 0 0.25rem;
+        }
+        
+        .page-link {
+            display: block;
+            padding: 0.45rem 0.85rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background-color: var(--background-light);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .questionario-modal .modal-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html"><i class="fas fa-book me-1"></i>Recursos</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Questionários de Saúde Mental</h1>
+                    <p class="slide-in">Ferramentas de autoavaliação para ajudar você a entender melhor seu bem-estar emocional e mental.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#testes" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-clipboard-list me-2"></i>Ver Questionários
+                        </a>
+                        <a href="#como-funciona" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-info-circle me-2"></i>Como Funciona
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-clipboard-check" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section id="como-funciona" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Como Funcionam Nossos Questionários</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="card-title">Autoavaliação</h3>
+                            <p class="card-text">Responda perguntas simples sobre seus pensamentos, sentimentos e comportamentos recentes.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3 class="card-title">Análise Automática</h3>
+                            <p class="card-text">Nosso sistema calcula sua pontuação com base em escalas validadas cientificamente.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3 class="card-title">Resultado Personalizado</h3>
+                            <p class="card-text">Receba um relatório detalhado sobre seu bem-estar mental com orientações específicas.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h3 class="card-title">Recomendações</h3>
+                            <p class="card-text">Obtenha sugestões de próximos passos, desde autocuidado até busca por ajuda profissional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testes Section -->
+    <section id="testes" class="testes-section">
+        <div class="container">
+            <h2 class="section-title mb-3">Nossos Questionários</h2>
+            <p class="text-center mb-5">Selecione um teste abaixo para começar sua autoavaliação</p>
+            
+            <div class="row">
+                <!-- Filtros -->
+                <div class="col-lg-3 mb-4">
+                    <div class="card search-filter-card">
+                        <div class="card-body">
+                            <h4 class="filter-title mb-3">
+                                <i class="fas fa-filter me-2"></i>Filtrar Testes
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Categoria:</label>
+                                <select class="form-select" id="categoriaTeste">
+                                    <option value="all">Todas</option>
+                                    <option value="ansiedade">Ansiedade</option>
+                                    <option value="depressao">Depressão</option>
+                                    <option value="dependencia">Dependência</option>
+                                    <option value="estresse">Estresse</option>
+                                    <option value="bem-estar">Bem-estar</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Tempo estimado:</label>
+                                <select class="form-select" id="tempoTeste">
+                                    <option value="all">Qualquer duração</option>
+                                    <option value="short">Até 5 minutos</option>
+                                    <option value="medium">5-10 minutos</option>
+                                    <option value="long">Mais de 10 minutos</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn btn-primary-custom w-100" id="aplicarFiltrosTestes">
+                                <i class="fas fa-search me-2"></i>Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Testes -->
+                <div class="col-lg-9">
+                    <div class="row g-4" id="listaTestes">
+                        <!-- Testes serão carregados aqui via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Paginação -->
+                <div class="pagination-container" id="paginacaoContainer">
+                    <ul class="pagination" id="paginacao">
+                        <!-- Paginação será gerada via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal do Questionário -->
+    <div class="modal fade questionario-modal" id="questionarioModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="questionarioModalLabel">Questionário</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="progress mb-4">
+                        <div class="progress-bar" id="progressoQuestionario" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    
+                    <div id="containerPerguntas">
+                        <!-- Perguntas serão inseridas aqui -->
+                    </div>
+                    
+                    <div id="containerResultado" style="display: none;">
+                        <h4 class="text-center mb-4">Seu Resultado</h4>
+                        <div class="card mb-4 resultado-card">
+                            <div class="card-body text-center">
+                                <h2 id="pontuacaoTotal" class="display-4 mb-3">0</h2>
+                                <h5 id="nivelResultado" class="mb-3">Nível</h5>
+                                <p id="descricaoResultado" class="mb-0">Descrição do resultado</p>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <span id="recomendacaoResultado">Recomendação baseada no seu resultado</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-custom" onclick="reiniciarQuestionario()">
+                                <i class="fas fa-redo me-2"></i>Refazer Teste
+                            </button>
+                            <button class="btn btn-primary-custom" onclick="salvarResultado()">
+                                <i class="fas fa-save me-2"></i>Salvar Resultado
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="recursos.html">Artigos</a></li>
+                        <li><a href="recursos.html">Ferramentas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dados dos questionários
+        const questionariosData = [
+            {
+                id: 1,
+                titulo: "Teste de Ansiedade (GAD-7)",
+                descricao: "Avalie seus níveis de ansiedade nas últimas 2 semanas",
+                categoria: "ansiedade",
+                tempo: "short",
+                icone: "fas fa-heartbeat",
+                perguntas: [
+                    {
+                        texto: "Com que frequência você se sentiu nervoso(a), ansioso(a) ou muito tenso(a)?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você não conseguiu parar ou controlar as preocupações?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se preocupou com diferentes coisas?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve dificuldade para relaxar?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você ficou tão inquieto que não conseguiu ficar parado?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você ficou irritado ou incomodado facilmente?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você sentiu medo como se algo horrível fosse acontecer?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    }
+                ],
+                resultados: [
+                    { min: 0, max: 4, nivel: "Mínimo", descricao: "Seus níveis de ansiedade estão dentro da faixa considerada normal.", recomendacao: "Continue mantendo hábitos saudáveis." },
+                    { min: 5, max: 9, nivel: "Leve", descricao: "Você pode estar experimentando ansiedade leve.", recomendacao: "Considere praticar técnicas de relaxamento e monitorar seus sintomas." },
+                    { min: 10, max: 14, nivel: "Moderado", descricao: "Você está apresentando sintomas moderados de ansiedade.", recomendacao: "Recomendamos buscar orientação de um profissional de saúde mental." },
+                    { min: 15, max: 21, nivel: "Severo", descricao: "Seus sintomas de ansiedade são severos.", recomendacao: "É altamente recomendável procurar ajuda profissional o quanto antes." }
+                ]
+            },
+            {
+                id: 2,
+                titulo: "Escala de Depressão (PHQ-9)",
+                descricao: "Avalie sintomas de depressão nas últimas 2 semanas",
+                categoria: "depressao",
+                tempo: "medium",
+                icone: "fas fa-cloud",
+                perguntas: [
+                    {
+                        texto: "Com que frequência você se sentiu desanimado(a), deprimido(a) ou sem esperança?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você sentiu pouco interesse ou prazer em fazer coisas?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve problemas para dormir ou dormiu demais?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se sentiu cansado(a) ou com pouca energia?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve pouco apetite ou comeu demais?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se sentiu mal consigo mesmo(a) - ou que você é um(a) fracassado(a) ou que decepcionou a si mesmo(a) ou sua família?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve dificuldade para se concentrar em coisas, como ler o jornal ou assistir televisão?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se moveu ou falou tão devagar que outras pessoas poderiam ter notado? Ou o contrário - tão agitado(a) ou inquieto(a) que você se moveu muito mais do que o habitual?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você pensou que estaria melhor morto(a) ou em se machucar de alguma maneira?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    }
+                ],
+                resultados: [
+                    { min: 0, max: 4, nivel: "Mínimo", descricao: "Seus níveis de depressão estão dentro da faixa considerada normal.", recomendacao: "Continue mantendo hábitos saudáveis." },
+                    { min: 5, max: 9, nivel: "Leve", descricao: "Você pode estar experimentando depressão leve.", recomendacao: "Considere praticar atividades prazerosas e monitorar seus sintomas." },
+                    { min: 10, max: 14, nivel: "Moderado", descricao: "Você está apresentando sintomas moderados de depressão.", recomendacao: "Recomendamos buscar orientação de um profissional de saúde mental." },
+                    { min: 15, max: 19, nivel: "Moderadamente Severo", descricao: "Seus sintomas de depressão são moderadamente severos.", recomendacao: "É recomendável procurar ajuda profissional em breve." },
+                    { min: 20, max: 27, nivel: "Severo", descricao: "Seus sintomas de depressão são severos.", recomendacao: "É altamente recomendável procurar ajuda profissional imediatamente." }
+                ]
+            },
+            {
+                id: 3,
+                titulo: "Teste de Dependência de Internet",
+                descricao: "Avalie seu uso da internet e possíveis comportamentos problemáticos",
+                categoria: "dependencia",
+                tempo: "medium",
+                icone: "fas fa-laptop",
+                perguntas: [
+                    {
+                        texto: "Com que frequência você se sentiu desanimado(a), deprimido(a) ou sem esperança?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você sentiu pouco interesse ou prazer em fazer coisas?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve problemas para dormir ou dormiu demais?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se sentiu cansado(a) ou com pouca energia?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve pouco apetite ou comeu demais?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se sentiu mal consigo mesmo(a) - ou que você é um(a) fracassado(a) ou que decepcionou a si mesmo(a) ou sua família?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você teve dificuldade para se concentrar em coisas, como ler o jornal ou assistir televisão?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você se moveu ou falou tão devagar que outras pessoas poderiam ter notado? Ou o contrário - tão agitado(a) ou inquieto(a) que você se moveu muito mais do que o habitual?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    },
+                    {
+                        texto: "Com que frequência você pensou que estaria melhor morto(a) ou em se machucar de alguma maneira?",
+                        opcoes: [
+                            { texto: "Nenhum dia", valor: 0 },
+                            { texto: "Vários dias", valor: 1 },
+                            { texto: "Mais da metade dos dias", valor: 2 },
+                            { texto: "Quase todos os dias", valor: 3 }
+                        ]
+                    }
+                ],
+                resultados: [
+                    { min: 0, max: 4, nivel: "Mínimo", descricao: "Seus níveis de depressão estão dentro da faixa considerada normal.", recomendacao: "Continue mantendo hábitos saudáveis." },
+                    { min: 5, max: 9, nivel: "Leve", descricao: "Você pode estar experimentando depressão leve.", recomendacao: "Considere praticar atividades prazerosas e monitorar seus sintomas." },
+                    { min: 10, max: 14, nivel: "Moderado", descricao: "Você está apresentando sintomas moderados de depressão.", recomendacao: "Recomendamos buscar orientação de um profissional de saúde mental." },
+                    { min: 15, max: 19, nivel: "Moderadamente Severo", descricao: "Seus sintomas de depressão são moderadamente severos.", recomendacao: "É recomendável procurar ajuda profissional em breve." },
+                    { min: 20, max: 27, nivel: "Severo", descricao: "Seus sintomas de depressão são severos.", recomendacao: "É altamente recomendável procurar ajuda profissional imediatamente." }
+                ]
+            },
+            {
+                id: 4,
+                titulo: "Escala de Estresse Percebido",
+                descricao: "Avalie seus níveis de estresse no último mês",
+                categoria: "estresse",
+                tempo: "short",
+                icone: "fas fa-tachometer-alt",
+                perguntas: [
+                    // Perguntas sobre estresse
+                ],
+                resultados: [
+                    // Resultados para estresse
+                ]
+            },
+            {
+                id: 5,
+                titulo: "Questionário de Bem-Estar (WHO-5)",
+                descricao: "Avalie seu bem-estar psicológico nas últimas 2 semanas",
+                categoria: "bem-estar",
+                tempo: "short",
+                icone: "fas fa-smile",
+                perguntas: [
+                    // Perguntas sobre bem-estar
+                ],
+                resultados: [
+                    // Resultados para bem-estar
+                ]
+            },
+            {
+                id: 6,
+                titulo: "Questionário de Bem-Estar (WHO-5)",
+                descricao: "Avalie seu bem-estar psicológico nas últimas 2 semanas",
+                categoria: "bem-estar",
+                tempo: "short",
+                icone: "fas fa-smile",
+                perguntas: [
+                    // Perguntas sobre bem-estar
+                ],
+                resultados: [
+                    // Resultados para bem-estar
+                ]
+            },
+            {
+                id: 7,
+                titulo: "Questionário de Bem-Estar (WHO-5)",
+                descricao: "Avalie seu bem-estar psicológico nas últimas 2 semanas",
+                categoria: "bem-estar",
+                tempo: "short",
+                icone: "fas fa-smile",
+                perguntas: [
+                    // Perguntas sobre bem-estar
+                ],
+                resultados: [
+                    // Resultados para bem-estar
+                ]
+            },
+            {
+                id: 8,
+                titulo: "Questionário de Bem-Estar (WHO-5)",
+                descricao: "Avalie seu bem-estar psicológico nas últimas 2 semanas",
+                categoria: "bem-estar",
+                tempo: "short",
+                icone: "fas fa-smile",
+                perguntas: [
+                    // Perguntas sobre bem-estar
+                ],
+                resultados: [
+                    // Resultados para bem-estar
+                ]
+            },
+        ];
+
+        // Variáveis de estado para paginação
+        let questionarioAtual = null;
+        let respostasAtuais = [];
+        let perguntaAtual = 0;
+        let currentPage = 1;
+        const itemsPerPage = 6; // Número de itens por página
+
+        // Função para renderizar os questionários
+        function renderizarQuestionarios(filtroCategoria = 'all', filtroTempo = 'all', page = 1) {
+            const container = document.getElementById('listaTestes');
+            const paginationContainer = document.getElementById('paginacao');
+            
+            container.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            
+            const questionariosFiltrados = questionariosData.filter(q => {
+                const categoriaMatch = filtroCategoria === 'all' || q.categoria === filtroCategoria;
+                const tempoMatch = filtroTempo === 'all' || q.tempo === filtroTempo;
+                return categoriaMatch && tempoMatch;
+            });
+            
+            if (questionariosFiltrados.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-clipboard-question fa-3x mb-3" style="color: var(--accent-color);"></i>
+                        <h4>Nenhum questionário encontrado</h4>
+                        <p class="text-muted">Tente ajustar os filtros</p>
+                    </div>
+                `;
+                document.getElementById('paginacaoContainer').style.display = 'none';
+                return;
+            }
+            
+            // Calcular itens para a página atual
+            const totalPages = Math.ceil(questionariosFiltrados.length / itemsPerPage);
+            currentPage = Math.min(Math.max(page, 1), totalPages); // Garantir que a página está dentro dos limites
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, questionariosFiltrados.length);
+            const questionariosPagina = questionariosFiltrados.slice(startIndex, endIndex);
+            
+            // Renderizar questionários da página atual
+            questionariosPagina.forEach(q => {
+                const tempoText = {
+                    'short': 'Até 5 min',
+                    'medium': '5-10 min',
+                    'long': 'Mais de 10 min'
+                }[q.tempo] || q.tempo;
+                
+                const categoriaText = {
+                    'ansiedade': 'Ansiedade',
+                    'depressao': 'Depressão',
+                    'dependencia': 'Dependência',
+                    'estresse': 'Estresse',
+                    'bem-estar': 'Bem-estar'
+                }[q.categoria] || q.categoria;
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="card content-card h-100">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="${q.icone}"></i>
+                            </div>
+                            <h3 class="card-title">${q.titulo}</h3>
+                            <p class="card-text">${q.descricao}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="badge bg-primary">${categoriaText}</span>
+                                <span class="small text-muted"><i class="fas fa-clock me-1"></i>${tempoText}</span>
+                            </div>
+                            <button class="btn btn-primary-custom w-100 mt-3 iniciar-teste" data-id="${q.id}">
+                                <i class="fas fa-play me-2"></i>Iniciar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Configurar eventos dos botões
+            document.querySelectorAll('.iniciar-teste').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    iniciarQuestionario(id);
+                });
+            });
+            
+            // Renderizar paginação
+            document.getElementById('paginacaoContainer').style.display = 'flex';
+            
+            // Botão Anterior
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#" aria-label="Anterior">&laquo;</a>`;
+            prevItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    renderizarQuestionarios(filtroCategoria, filtroTempo, currentPage - 1);
+                }
+            });
+            paginationContainer.appendChild(prevItem);
+            
+            // Números das páginas
+            const maxVisiblePages = 5; // Número máximo de páginas visíveis na paginação
+            let startPage, endPage;
+            
+            if (totalPages <= maxVisiblePages) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+                const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+                
+                if (currentPage <= maxPagesBeforeCurrent) {
+                    startPage = 1;
+                    endPage = maxVisiblePages;
+                } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+                    startPage = totalPages - maxVisiblePages + 1;
+                    endPage = totalPages;
+                } else {
+                    startPage = currentPage - maxPagesBeforeCurrent;
+                    endPage = currentPage + maxPagesAfterCurrent;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarQuestionarios(filtroCategoria, filtroTempo, i);
+                });
+                paginationContainer.appendChild(pageItem);
+            }
+            
+            // Botão Próximo
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#" aria-label="Próximo">&raquo;</a>`;
+            nextItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    renderizarQuestionarios(filtroCategoria, filtroTempo, currentPage + 1);
+                }
+            });
+            paginationContainer.appendChild(nextItem);
+        }
+
+        document.getElementById('aplicarFiltrosTestes').addEventListener('click', function() {
+            const categoria = document.getElementById('categoriaTeste').value;
+            const tempo = document.getElementById('tempoTeste').value;
+            renderizarQuestionarios(categoria, tempo, 1); // Sempre voltar para a página 1 ao aplicar filtros
+        });
+
+        // Função para iniciar um questionário
+        function iniciarQuestionario(id) {
+            questionarioAtual = questionariosData.find(q => q.id === id);
+            if (!questionarioAtual) return;
+            
+            respostasAtuais = Array(questionarioAtual.perguntas.length).fill(null);
+            perguntaAtual = 0;
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('questionarioModal'));
+            document.getElementById('questionarioModalLabel').textContent = questionarioAtual.titulo;
+            document.getElementById('containerResultado').style.display = 'none';
+            document.getElementById('containerPerguntas').style.display = 'block';
+            
+            // Renderizar primeira pergunta
+            renderizarPergunta();
+            modal.show();
+        }
+
+        // Função para renderizar a pergunta atual
+        function renderizarPergunta() {
+            if (!questionarioAtual || perguntaAtual >= questionarioAtual.perguntas.length) {
+                mostrarResultado();
+                return;
+            }
+            
+            const pergunta = questionarioAtual.perguntas[perguntaAtual];
+            const container = document.getElementById('containerPerguntas');
+            
+            // Atualizar progresso
+            const progresso = Math.round((perguntaAtual / questionarioAtual.perguntas.length) * 100);
+            document.getElementById('progressoQuestionario').style.width = `${progresso}%`;
+            
+            // Criar HTML da pergunta
+            let html = `
+                <h5 class="mb-4">${perguntaAtual + 1}. ${pergunta.texto}</h5>
+                <div class="list-group mb-4">
+            `;
+            
+            pergunta.opcoes.forEach((opcao, index) => {
+                const checked = respostasAtuais[perguntaAtual] === index ? 'checked' : '';
+                html += `
+                    <label class="list-group-item">
+                        <input class="form-check-input me-2" type="radio" name="resposta" value="${index}" ${checked}>
+                        ${opcao.texto}
+                    </label>
+                `;
+            });
+            
+            html += `</div>`;
+            
+            // Adicionar botões de navegação
+            html += `
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-custom ${perguntaAtual === 0 ? 'invisible' : ''}" onclick="anteriorPergunta()">
+                        <i class="fas fa-arrow-left me-2"></i>Anterior
+                    </button>
+                    <button class="btn btn-primary-custom" onclick="proximaPergunta()">
+                        ${perguntaAtual === questionarioAtual.perguntas.length - 1 ? 'Finalizar' : 'Próxima'} 
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // Funções de navegação do questionário
+        function anteriorPergunta() {
+            if (perguntaAtual > 0) {
+                perguntaAtual--;
+                renderizarPergunta();
+            }
+        }
+
+        function proximaPergunta() {
+            const respostaSelecionada = document.querySelector('input[name="resposta"]:checked');
+            if (!respostaSelecionada) {
+                alert('Por favor, selecione uma resposta antes de continuar.');
+                return;
+            }
+            
+            respostasAtuais[perguntaAtual] = parseInt(respostaSelecionada.value);
+            
+            if (perguntaAtual < questionarioAtual.perguntas.length - 1) {
+                perguntaAtual++;
+                renderizarPergunta();
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        // Função para calcular e mostrar o resultado
+        function mostrarResultado() {
+            if (!questionarioAtual) return;
+            
+            // Calcular pontuação total
+            let pontuacao = 0;
+            for (let i = 0; i < questionarioAtual.perguntas.length; i++) {
+                const respostaIndex = respostasAtuais[i];
+                if (respostaIndex !== null) {
+                    pontuacao += questionarioAtual.perguntas[i].opcoes[respostaIndex].valor;
+                }
+            }
+            
+            // Encontrar resultado correspondente
+            let resultado = questionarioAtual.resultados.find(r => 
+                pontuacao >= r.min && pontuacao <= r.max
+            ) || questionarioAtual.resultados[0];
+            
+            // Atualizar UI com o resultado
+            document.getElementById('pontuacaoTotal').textContent = pontuacao;
+            document.getElementById('nivelResultado').textContent = resultado.nivel;
+            document.getElementById('descricaoResultado').textContent = resultado.descricao;
+            document.getElementById('recomendacaoResultado').textContent = resultado.recomendacao;
+            
+            // Atualizar cores com base no nível
+            const nivelElement = document.getElementById('nivelResultado');
+            nivelElement.className = 'mb-3'; // Reset classes
+            
+            if (resultado.nivel.toLowerCase().includes('sever')) {
+                nivelElement.classList.add('text-danger');
+            } else if (resultado.nivel.toLowerCase().includes('moderad')) {
+                nivelElement.classList.add('text-warning');
+            } else if (resultado.nivel.toLowerCase().includes('leve')) {
+                nivelElement.classList.add('text-info');
+            } else {
+                nivelElement.classList.add('text-success');
+            }
+            
+            // Mostrar seção de resultado
+            document.getElementById('containerPerguntas').style.display = 'none';
+            document.getElementById('containerResultado').style.display = 'block';
+            
+            // Atualizar progresso para 100%
+            document.getElementById('progressoQuestionario').style.width = '100%';
+        }
+
+        // Função para reiniciar o questionário
+        function reiniciarQuestionario() {
+            if (!questionarioAtual) return;
+            
+            respostasAtuais = Array(questionarioAtual.perguntas.length).fill(null);
+            perguntaAtual = 0;
+            
+            document.getElementById('containerResultado').style.display = 'none';
+            document.getElementById('containerPerguntas').style.display = 'block';
+            renderizarPergunta();
+        }
+
+        // Função para salvar o resultado (simulado)
+        function salvarResultado() {
+            alert('Faça login para salvar seus resultados e acompanhar seu histórico.');
+            // Na implementação real, aqui você enviaria os dados para o servidor
+        }
+
+        // Configurar filtros
+        document.getElementById('aplicarFiltrosTestes').addEventListener('click', function() {
+            const categoria = document.getElementById('categoriaTeste').value;
+            const tempo = document.getElementById('tempoTeste').value;
+            renderizarQuestionarios(categoria, tempo, 1); // Sempre voltar para a página 1 ao aplicar filtros
+        });
+
+        // Inicializar questionários quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarQuestionarios('all', 'all', 1);
+            
+            // Permitir fechar o modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('questionarioModal').classList.contains('show')) {
+                    bootstrap.Modal.getInstance(document.getElementById('questionarioModal')).hide();
+                }
+            });
+            
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+            
+            console.log('Página de questionários carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Científica | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Content Cards */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Estilos específicos para artigos */
+        .artigos-section {
+            background-color: var(--background-light);
+            padding-bottom: 3rem;
+            padding-top: 3rem;
+        }
+
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .filter-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .artigo-card {
+            transition: all 0.3s ease;
+        }
+
+        .artigo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .artigo-badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.35em 0.65em;
+        }
+
+        .artigo-tipo {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding-left: 0.65em;
+            padding-right: 0.65em;
+        }
+
+        .artigo-abstract {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Botões */
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Paginação */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .page-item {
+            margin: 0 0.25rem;
+        }
+        
+        .page-link {
+            display: block;
+            padding: 0.45rem 0.85rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background-color: var(--background-light);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .artigo-card {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="biblioteca.html"><i class="fas fa-book me-1"></i>Biblioteca</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Biblioteca Científica</h1>
+                    <p class="slide-in">Artigos, pesquisas e publicações científicas sobre saúde mental, dependências e bem-estar psicológico.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#artigos" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-book-open me-2"></i>Explorar Artigos
+                        </a>
+                        <a href="#como-funciona" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-info-circle me-2"></i>Sobre a Biblioteca
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-book" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona Section -->
+    <section id="como-funciona" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Sobre Nossa Biblioteca</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="card-title">Conteúdo Selecionado</h3>
+                            <p class="card-text">Artigos revisados por pares e publicações científicas de fontes confiáveis na área de saúde mental.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <h3 class="card-title">Busca Avançada</h3>
+                            <p class="card-text">Filtre por tema, ano de publicação, tipo de estudo e palavras-chave para encontrar o que precisa.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h3 class="card-title">Acessível</h3>
+                            <p class="card-text">Resumos em linguagem acessível para facilitar o entendimento dos conceitos científicos.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="card-title">Para Todos</h3>
+                            <p class="card-text">Recursos para profissionais, pesquisadores e pessoas interessadas em aprender sobre saúde mental.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artigos Section -->
+    <section id="artigos" class="artigos-section">
+        <div class="container">
+            <h2 class="section-title mb-3">Nossa Coleção Científica</h2>
+            <p class="text-center mb-5">Explore artigos e pesquisas sobre saúde mental e dependências</p>
+            
+            <div class="row">
+                <!-- Filtros -->
+                <div class="col-lg-3 mb-4">
+                    <div class="card search-filter-card">
+                        <div class="card-body">
+                            <h4 class="filter-title mb-3">
+                                <i class="fas fa-filter me-2"></i>Filtrar Artigos
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Buscar:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="buscaArtigo" placeholder="Título, autor ou palavras-chave">
+                                    <button class="btn btn-primary-custom" type="button" id="botaoBusca">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Tema:</label>
+                                <select class="form-select" id="temaArtigo">
+                                    <option value="all">Todos</option>
+                                    <option value="depressao">Depressão</option>
+                                    <option value="ansiedade">Ansiedade</option>
+                                    <option value="dependencia">Dependência Química</option>
+                                    <option value="tdah">TDAH</option>
+                                    <option value="autismo">Autismo</option>
+                                    <option value="esquizofrenia">Esquizofrenia</option>
+                                    <option value="bem-estar">Bem-estar</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de Estudo:</label>
+                                <select class="form-select" id="tipoArtigo">
+                                    <option value="all">Todos</option>
+                                    <option value="revisao">Revisão Sistemática</option>
+                                    <option value="ensaio">Ensaio Clínico</option>
+                                    <option value="longitudinal">Longitudinal</option>
+                                    <option value="meta-analise">Meta-análise</option>
+                                    <option value="qualitativo">Qualitativo</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Ano de Publicação:</label>
+                                <select class="form-select" id="anoArtigo">
+                                    <option value="all">Todos</option>
+                                    <option value="2023">2023-2024</option>
+                                    <option value="2020">2020-2022</option>
+                                    <option value="2015">2015-2019</option>
+                                    <option value="2010">2010-2014</option>
+                                    <option value="2000">Antes de 2010</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn btn-primary-custom w-100" id="aplicarFiltrosArtigos">
+                                <i class="fas fa-filter me-2"></i>Aplicar Filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Artigos -->
+                <div class="col-lg-9">
+                    <div class="row g-4" id="listaArtigos">
+                        <!-- Artigos serão carregados aqui via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Paginação -->
+                <div class="pagination-container" id="paginacaoContainer">
+                    <ul class="pagination" id="paginacao">
+                        <!-- Paginação será gerada via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal do Artigo -->
+    <div class="modal fade" id="artigoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="artigoModalLabel">Detalhes do Artigo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <h3 id="artigoTitulo"></h3>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary" id="artigoTema"></span>
+                            <span class="badge bg-secondary" id="artigoTipo"></span>
+                            <span class="badge bg-info" id="artigoAno"></span>
+                        </div>
+                        <p class="text-muted" id="artigoAutores"></p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Resumo</h5>
+                        <p id="artigoResumo"></p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Palavras-chave</h5>
+                        <div id="artigoPalavrasChave" class="d-flex flex-wrap gap-2"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Referência</h5>
+                        <p id="artigoReferencia" class="font-monospace small"></p>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Para acessar o artigo completo, clique no link abaixo.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Fechar
+                    </button>
+                    <a href="#" class="btn btn-primary-custom" id="artigoLink" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i>Acessar Artigo Completo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="biblioteca.html">Biblioteca</a></li>
+                        <li><a href="#">Ferramentas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dados dos artigos (simulados - em uma aplicação real, viriam de uma API)
+        const artigosData = [
+            {
+                id: 1,
+                titulo: "Eficácia da Terapia Cognitivo-Comportamental na Depressão Maior: Uma Meta-análise",
+                autores: "Silva, A. B., Oliveira, C. D., & Santos, E. F.",
+                resumo: "Esta meta-análise investigou a eficácia da Terapia Cognitivo-Comportamental (TCC) no tratamento da depressão maior em comparação com outras intervenções. Os resultados indicam que a TCC é significativamente mais eficaz do que grupos de controle e tão eficaz quanto medicamentos antidepressivos, com menores taxas de recaída.",
+                tema: "depressao",
+                tipo: "meta-analise",
+                ano: 2023,
+                palavrasChave: ["depressão", "TCC", "terapia cognitivo-comportamental", "meta-análise"],
+                referencia: "Silva, A. B., Oliveira, C. D., & Santos, E. F. (2023). Eficácia da Terapia Cognitivo-Comportamental na Depressão Maior: Uma Meta-análise. Journal of Clinical Psychology, 45(3), 210-225.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 2,
+                titulo: "Neurobiologia da Dependência de Substâncias: Avanços Recentes",
+                autores: "Pereira, G. H., Lima, I. J., & Costa, K. L.",
+                resumo: "Revisão sistemática dos avanços recentes na compreensão dos mecanismos neurobiológicos subjacentes à dependência de substâncias. O artigo destaca as descobertas sobre circuitos de recompensa, plasticidade neural e potenciais alvos para intervenção farmacológica.",
+                tema: "dependencia",
+                tipo: "revisao",
+                ano: 2022,
+                palavrasChave: ["dependência química", "neurobiologia", "circuitos de recompensa", "plasticidade neural"],
+                referencia: "Pereira, G. H., Lima, I. J., & Costa, K. L. (2022). Neurobiologia da Dependência de Substâncias: Avanços Recentes. Addiction Neuroscience, 12(1), 45-62.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 3,
+                titulo: "Mindfulness para Redução do Estresse em Profissionais de Saúde",
+                autores: "Martins, M. N., Alves, O. P., & Ribeiro, Q. R.",
+                resumo: "Ensaio clínico randomizado avaliando a eficácia de um programa de 8 semanas de mindfulness na redução do estresse entre profissionais de saúde. Os resultados mostram reduções significativas nos níveis de estresse percebido e melhora na qualidade de vida.",
+                tema: "bem-estar",
+                tipo: "ensaio",
+                ano: 2021,
+                palavrasChave: ["mindfulness", "estresse", "profissionais de saúde", "intervenção"],
+                referencia: "Martins, M. N., Alves, O. P., & Ribeiro, Q. R. (2021). Mindfulness para Redução do Estresse em Profissionais de Saúde. Journal of Occupational Health Psychology, 26(2), 123-135.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 4,
+                titulo: "Fatores de Risco para Ansiedade em Estudantes Universitários",
+                autores: "Souza, S. T., Ferreira, U. V., & Wagner, W. X.",
+                resumo: "Estudo longitudinal identificando fatores de risco para o desenvolvimento de transtornos de ansiedade em estudantes universitários. Os principais preditores incluíram perfeccionismo, falta de suporte social e dificuldades financeiras.",
+                tema: "ansiedade",
+                tipo: "longitudinal",
+                ano: 2020,
+                palavrasChave: ["ansiedade", "estudantes universitários", "fatores de risco", "longitudinal"],
+                referencia: "Souza, S. T., Ferreira, U. V., & Wagner, W. X. (2020). Fatores de Risco para Ansiedade em Estudantes Universitários. Anxiety and Stress, 18(4), 301-315.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 5,
+                titulo: "Eficácia de Novos Antipsicóticos no Tratamento da Esquizofrenia Refratária",
+                autores: "Yamamoto, Y. Z., Kim, K. L., & Nguyen, N. O.",
+                resumo: "Meta-análise comparando a eficácia de novos antipsicóticos atípicos no tratamento de casos refratários de esquizofrenia. Os resultados sugerem diferenças significativas entre os medicamentos em termos de eficácia e perfil de efeitos colaterais.",
+                tema: "esquizofrenia",
+                tipo: "meta-analise",
+                ano: 2019,
+                palavrasChave: ["esquizofrenia", "antipsicóticos", "tratamento", "meta-análise"],
+                referencia: "Yamamoto, Y. Z., Kim, K. L., & Nguyen, N. O. (2019). Eficácia de Novos Antipsicóticos no Tratamento da Esquizofrenia Refratária. Schizophrenia Research, 203, 45-58.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 6,
+                titulo: "Intervenções Precoces no Transtorno do Espectro Autista: Uma Revisão Sistemática",
+                autores: "Chen, C. D., Patel, P. Q., & Rodriguez, R. S.",
+                resumo: "Revisão sistemática avaliando a eficácia de diferentes abordagens de intervenção precoce para crianças com transtorno do espectro autista. As intervenções baseadas em análise aplicada do comportamento mostraram os melhores resultados.",
+                tema: "autismo",
+                tipo: "revisao",
+                ano: 2018,
+                palavrasChave: ["autismo", "intervenção precoce", "ABA", "revisão sistemática"],
+                referencia: "Chen, C. D., Patel, P. Q., & Rodriguez, R. S. (2018). Intervenções Precoces no Transtorno do Espectro Autista: Uma Revisão Sistemática. Autism Research, 11(5), 712-725.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 7,
+                titulo: "Impacto da Pandemia na Saúde Mental de Adolescentes",
+                autores: "Garcia, G. H., Thompson, T. I., & Lee, L. K.",
+                resumo: "Estudo qualitativo explorando o impacto da pandemia de COVID-19 na saúde mental de adolescentes. Os temas emergentes incluíram aumento da solidão, ansiedade sobre o futuro e desafios com o aprendizado remoto.",
+                tema: "ansiedade",
+                tipo: "qualitativo",
+                ano: 2021,
+                palavrasChave: ["pandemia", "saúde mental", "adolescentes", "COVID-19"],
+                referencia: "Garcia, G. H., Thompson, T. I., & Lee, L. K. (2021). Impacto da Pandemia na Saúde Mental de Adolescentes. Journal of Adolescent Health, 68(3), 456-463.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 8,
+                titulo: "Eficácia da Psicoeducação em Familiares de Pacientes com Transtorno Bipolar",
+                autores: "Rossi, R. S., Bianchi, B. T., & Moretti, M. U.",
+                resumo: "Ensaio clínico avaliando um programa de psicoeducação para familiares de pacientes com transtorno bipolar. Os resultados indicaram melhora no conhecimento sobre a doença, redução da sobrecarga do cuidador e melhor adesão ao tratamento.",
+                tema: "bem-estar",
+                tipo: "ensaio",
+                ano: 2020,
+                palavrasChave: ["transtorno bipolar", "psicoeducação", "familiares", "intervenção"],
+                referencia: "Rossi, R. S., Bianchi, B. T., & Moretti, M. U. (2020). Eficácia da Psicoeducação em Familiares de Pacientes com Transtorno Bipolar. Bipolar Disorders, 22(4), 345-357.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 9,
+                titulo: "Marcadores Biológicos na Resposta ao Tratamento da Depressão",
+                autores: "Wilson, W. X., Adams, A. Y., & Brown, B. Z.",
+                resumo: "Estudo longitudinal investigando potenciais marcadores biológicos preditivos da resposta ao tratamento antidepressivo. Os níveis basais de proteína C-reativa e fator neurotrófico derivado do cérebro mostraram valor preditivo.",
+                tema: "depressao",
+                tipo: "longitudinal",
+                ano: 2019,
+                palavrasChave: ["depressão", "biomarcadores", "tratamento", "predição"],
+                referencia: "Wilson, W. X., Adams, A. Y., & Brown, B. Z. (2019). Marcadores Biológicos na Resposta ao Tratamento da Depressão. Molecular Psychiatry, 24(5), 678-690.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 10,
+                titulo: "Terapia Assistida por Animais para Crianças com TDAH",
+                autores: "Miller, M. N., Davis, D. O., & Evans, E. P.",
+                resumo: "Ensaio clínico randomizado avaliando os benefícios da terapia assistida por cães em crianças com TDAH. Os resultados mostraram melhorias significativas nos sintomas de hiperatividade e atenção em comparação com o grupo controle.",
+                tema: "tdah",
+                tipo: "ensaio",
+                ano: 2018,
+                palavrasChave: ["TDAH", "terapia assistida por animais", "crianças", "intervenção"],
+                referencia: "Miller, M. N., Davis, D. O., & Evans, E. P. (2018). Terapia Assistida por Animais para Crianças com TDAH. Journal of Attention Disorders, 22(8), 765-777.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 11,
+                titulo: "Prevalência e Fatores de Risco para Dependência de Internet",
+                autores: "Zhang, Z. X., Liu, L. Y., & Wang, W. V.",
+                resumo: "Estudo transversal em grande escala investigando a prevalência e fatores de risco associados à dependência de internet em adolescentes. O uso excessivo foi associado a problemas de sono, desempenho acadêmico prejudicado e sintomas depressivos.",
+                tema: "dependencia",
+                tipo: "longitudinal",
+                ano: 2022,
+                palavrasChave: ["dependência de internet", "adolescentes", "fatores de risco", "prevalência"],
+                referencia: "Zhang, Z. X., Liu, L. Y., & Wang, W. V. (2022). Prevalência e Fatores de Risco para Dependência de Internet. Cyberpsychology, Behavior, and Social Networking, 25(3), 156-168.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            },
+            {
+                id: 12,
+                titulo: "Efeitos do Exercício Físico na Função Cognitiva em Idosos",
+                autores: "Taylor, T. U., Smith, S. I., & Johnson, J. K.",
+                resumo: "Meta-análise examinando os efeitos de diferentes modalidades de exercício físico na função cognitiva de idosos. Exercícios aeróbicos e de resistência mostraram benefícios significativos, especialmente para memória e funções executivas.",
+                tema: "bem-estar",
+                tipo: "meta-analise",
+                ano: 2021,
+                palavrasChave: ["exercício físico", "função cognitiva", "idosos", "meta-análise"],
+                referencia: "Taylor, T. U., Smith, S. I., & Johnson, J. K. (2021). Efeitos do Exercício Físico na Função Cognitiva em Idosos. Aging & Mental Health, 25(4), 612-624.",
+                link: "https://doi.org/10.xxxx/xxxxxx"
+            }
+        ];
+
+        // Variáveis de estado para paginação
+        let currentPage = 1;
+        const itemsPerPage = 6; // Número de itens por página
+
+        // Função para renderizar os artigos
+        function renderizarArtigos(filtroTema = 'all', filtroTipo = 'all', filtroAno = 'all', termoBusca = '', page = 1) {
+            const container = document.getElementById('listaArtigos');
+            const paginationContainer = document.getElementById('paginacao');
+            
+            container.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            
+            // Aplicar filtros
+            const artigosFiltrados = artigosData.filter(a => {
+                const temaMatch = filtroTema === 'all' || a.tema === filtroTema;
+                const tipoMatch = filtroTipo === 'all' || a.tipo === filtroTipo;
+                
+                // Filtrar por ano
+                let anoMatch = true;
+                if (filtroAno !== 'all') {
+                    const ano = parseInt(a.ano);
+                    if (filtroAno === '2023') {
+                        anoMatch = ano >= 2023;
+                    } else if (filtroAno === '2020') {
+                        anoMatch = ano >= 2020 && ano <= 2022;
+                    } else if (filtroAno === '2015') {
+                        anoMatch = ano >= 2015 && ano <= 2019;
+                    } else if (filtroAno === '2010') {
+                        anoMatch = ano >= 2010 && ano <= 2014;
+                    } else if (filtroAno === '2000') {
+                        anoMatch = ano < 2010;
+                    }
+                }
+                
+                // Filtrar por termo de busca
+                let buscaMatch = true;
+                if (termoBusca) {
+                    const buscaLower = termoBusca.toLowerCase();
+                    buscaMatch = (
+                        a.titulo.toLowerCase().includes(buscaLower) ||
+                        a.autores.toLowerCase().includes(buscaLower) ||
+                        a.palavrasChave.some(p => p.toLowerCase().includes(buscaLower)) ||
+                        a.resumo.toLowerCase().includes(buscaLower)
+                    );
+                }
+                
+                return temaMatch && tipoMatch && anoMatch && buscaMatch;
+            });
+            
+            if (artigosFiltrados.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-book-open fa-3x mb-3" style="color: var(--accent-color);"></i>
+                        <h4>Nenhum artigo encontrado</h4>
+                        <p class="text-muted">Tente ajustar os filtros ou termos de busca</p>
+                    </div>
+                `;
+                document.getElementById('paginacaoContainer').style.display = 'none';
+                return;
+            }
+            
+            // Calcular itens para a página atual
+            const totalPages = Math.ceil(artigosFiltrados.length / itemsPerPage);
+            currentPage = Math.min(Math.max(page, 1), totalPages); // Garantir que a página está dentro dos limites
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, artigosFiltrados.length);
+            const artigosPagina = artigosFiltrados.slice(startIndex, endIndex);
+            
+            // Renderizar artigos da página atual
+            artigosPagina.forEach(a => {
+                const temaText = {
+                    'depressao': 'Depressão',
+                    'ansiedade': 'Ansiedade',
+                    'dependencia': 'Dependência',
+                    'tdah': 'TDAH',
+                    'autismo': 'Autismo',
+                    'esquizofrenia': 'Esquizofrenia',
+                    'bem-estar': 'Bem-estar'
+                }[a.tema] || a.tema;
+                
+                const tipoText = {
+                    'revisao': 'Revisão Sistemática',
+                    'ensaio': 'Ensaio Clínico',
+                    'longitudinal': 'Longitudinal',
+                    'meta-analise': 'Meta-análise',
+                    'qualitativo': 'Qualitativo'
+                }[a.tipo] || a.tipo;
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="card content-card artigo-card h-100">
+                        <div class="card-body p-4 position-relative">
+                            <h3 class="card-title">${a.titulo}</h3>
+                            <p class="card-text text-muted small">${a.autores}</p>
+                            <p class="card-text artigo-abstract">${a.resumo}</p>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <span class="badge bg-primary artigo-badge">${temaText}</span>
+                                <span class="artigo-tipo">${tipoText}</span>
+                                <span class="badge bg-secondary artigo-badge">${a.ano}</span>
+                            </div>
+                            <button class="btn btn-primary-custom w-100 ver-artigo" data-id="${a.id}">
+                                <i class="fas fa-book-open me-2"></i>Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Configurar eventos dos botões
+            document.querySelectorAll('.ver-artigo').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    mostrarDetalhesArtigo(id);
+                });
+            });
+            
+            // Renderizar paginação
+            document.getElementById('paginacaoContainer').style.display = 'flex';
+            
+            // Botão Anterior
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#" aria-label="Anterior">&laquo;</a>`;
+            prevItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    renderizarArtigos(filtroTema, filtroTipo, filtroAno, termoBusca, currentPage - 1);
+                }
+            });
+            paginationContainer.appendChild(prevItem);
+            
+            // Números das páginas
+            const maxVisiblePages = 5; // Número máximo de páginas visíveis na paginação
+            let startPage, endPage;
+            
+            if (totalPages <= maxVisiblePages) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+                const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+                
+                if (currentPage <= maxPagesBeforeCurrent) {
+                    startPage = 1;
+                    endPage = maxVisiblePages;
+                } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+                    startPage = totalPages - maxVisiblePages + 1;
+                    endPage = totalPages;
+                } else {
+                    startPage = currentPage - maxPagesBeforeCurrent;
+                    endPage = currentPage + maxPagesAfterCurrent;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarArtigos(filtroTema, filtroTipo, filtroAno, termoBusca, i);
+                });
+                paginationContainer.appendChild(pageItem);
+            }
+            
+            // Botão Próximo
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#" aria-label="Próximo">&raquo;</a>`;
+            nextItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    renderizarArtigos(filtroTema, filtroTipo, filtroAno, termoBusca, currentPage + 1);
+                }
+            });
+            paginationContainer.appendChild(nextItem);
+        }
+
+        // Função para mostrar detalhes do artigo em um modal
+        function mostrarDetalhesArtigo(id) {
+            const artigo = artigosData.find(a => a.id === id);
+            if (!artigo) return;
+            
+            const temaText = {
+                'depressao': 'Depressão',
+                'ansiedade': 'Ansiedade',
+                'dependencia': 'Dependência',
+                'tdah': 'TDAH',
+                'autismo': 'Autismo',
+                'esquizofrenia': 'Esquizofrenia',
+                'bem-estar': 'Bem-estar'
+            }[artigo.tema] || artigo.tema;
+            
+            const tipoText = {
+                'revisao': 'Revisão Sistemática',
+                'ensaio': 'Ensaio Clínico',
+                'longitudinal': 'Longitudinal',
+                'meta-analise': 'Meta-análise',
+                'qualitativo': 'Qualitativo'
+            }[artigo.tipo] || artigo.tipo;
+            
+            // Preencher modal com os dados do artigo
+            document.getElementById('artigoTitulo').textContent = artigo.titulo;
+            document.getElementById('artigoAutores').textContent = artigo.autores;
+            document.getElementById('artigoResumo').textContent = artigo.resumo;
+            document.getElementById('artigoReferencia').textContent = artigo.referencia;
+            document.getElementById('artigoLink').href = artigo.link;
+            
+            // Atualizar badges
+            document.getElementById('artigoTema').textContent = temaText;
+            document.getElementById('artigoTipo').textContent = tipoText;
+            document.getElementById('artigoAno').textContent = artigo.ano;
+            
+            // Adicionar palavras-chave
+            const palavrasChaveContainer = document.getElementById('artigoPalavrasChave');
+            palavrasChaveContainer.innerHTML = '';
+            artigo.palavrasChave.forEach(p => {
+                const span = document.createElement('span');
+                span.className = 'badge bg-light text-dark artigo-badge';
+                span.textContent = p;
+                palavrasChaveContainer.appendChild(span);
+            });
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('artigoModal'));
+            modal.show();
+        }
+
+        // Configurar filtros
+        document.getElementById('aplicarFiltrosArtigos').addEventListener('click', function() {
+            const tema = document.getElementById('temaArtigo').value;
+            const tipo = document.getElementById('tipoArtigo').value;
+            const ano = document.getElementById('anoArtigo').value;
+            const busca = document.getElementById('buscaArtigo').value.trim();
+            renderizarArtigos(tema, tipo, ano, busca, 1); // Sempre voltar para a página 1 ao aplicar filtros
+        });
+
+        // Configurar busca ao pressionar Enter
+        document.getElementById('buscaArtigo').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('aplicarFiltrosArtigos').click();
+            }
+        });
+
+        // Configurar botão de busca
+        document.getElementById('botaoBusca').addEventListener('click', function() {
+            document.getElementById('aplicarFiltrosArtigos').click();
+        });
+
+        // Inicializar artigos quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarArtigos('all', 'all', 'all', '', 1);
+            
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+            
+            console.log('Biblioteca de artigos carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>

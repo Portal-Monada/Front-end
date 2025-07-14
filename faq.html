@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* FAQ Styles */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            background-color: var(--white);
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .faq-question:focus {
+            outline: none;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.1s ease;
+        }
+
+        .faq-answer.show {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 1000px;
+        }
+
+        .faq-answer-content {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+
+        .faq-category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .search-box input {
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--secondary-color);
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding-right: 3rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Botões */
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            width: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .content-section {
+                padding: 3rem 0;
+            }
+            
+            .faq-question {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html"><i class="fas fa-book me-1"></i>Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="faq.html"><i class="fas fa-question-circle me-1"></i>FAQ</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Perguntas Frequentes</h1>
+                    <p class="slide-in">Encontre respostas para as dúvidas mais comuns sobre saúde mental, nossos serviços e como podemos ajudar.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#faq" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-question-circle me-2"></i>Ver Perguntas
+                        </a>
+                        <a href="#contato" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-envelope me-2"></i>Contato
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-question" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="search-box">
+                <input type="text" id="faqSearch" placeholder="Buscar perguntas...">
+                <button type="button"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="faq-container">
+                <!-- Categoria: Questionários -->
+                <div class="faq-category">
+                    <h3 class="faq-category-title"><i class="fas fa-clipboard-list me-2"></i>Questionários de Saúde Mental</h3>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                            Como funcionam os questionários de saúde mental?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq1" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Nossos questionários são ferramentas de autoavaliação baseadas em escalas validadas cientificamente. Eles ajudam você a refletir sobre seus pensamentos, sentimentos e comportamentos recentes. Após responder todas as perguntas, você receberá um resultado com orientações personalizadas.</p>
+                                <p>É importante lembrar que esses questionários não substituem um diagnóstico profissional, mas podem ser um primeiro passo para entender seu bem-estar mental.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                            Posso confiar nos resultados dos questionários?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq2" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Nossos questionários são baseados em instrumentos validados pela comunidade científica, como o GAD-7 para ansiedade e o PHQ-9 para depressão. No entanto, é importante entender que:</p>
+                                <ul>
+                                    <li>Os resultados são uma autoavaliação e não um diagnóstico</li>
+                                    <li>Eles refletem seu estado atual, que pode variar com o tempo</li>
+                                    <li>Para um diagnóstico preciso, consulte um profissional de saúde mental</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                            Meus resultados são armazenados ou compartilhados?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq3" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Respeitamos sua privacidade. Por padrão, seus resultados não são armazenados em nossos sistemas. Se você desejar salvar seus resultados para acompanhamento, pode criar uma conta gratuita, e os dados serão protegidos de acordo com nossa <a href="#">Política de Privacidade</a> e a legislação vigente (LGPD).</p>
+                                <p>Nunca compartilhamos informações pessoais ou resultados com terceiros sem sua autorização explícita.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categoria: Profissionais -->
+                <div class="faq-category">
+                    <h3 class="faq-category-title"><i class="fas fa-users me-2"></i>Profissionais e Atendimento</h3>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                            Como encontrar um profissional de saúde mental adequado?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq4" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Em nossa seção de <a href="profissionais.html">Profissionais</a>, você pode buscar por especialistas filtrando por:</p>
+                                <ul>
+                                    <li>Localização (presencial ou online)</li>
+                                    <li>Especialidade (psicólogos, psiquiatras, terapeutas)</li>
+                                    <li>Abordagem terapêutica</li>
+                                    <li>Valores e formas de pagamento</li>
+                                </ul>
+                                <p>Recomendamos marcar uma consulta inicial para avaliar se o profissional atende às suas necessidades.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                            Quais são os valores médios de consultas?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq5" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Os valores podem variar significativamente dependendo de:</p>
+                                <ul>
+                                    <li>Tipo de profissional (psicólogo, psiquiatra, etc.)</li>
+                                    <li>Experiência do profissional</li>
+                                    <li>Duração da sessão</li>
+                                    <li>Modalidade (presencial ou online)</li>
+                                    <li>Região do país</li>
+                                </ul>
+                                <p>Em média, você pode esperar os seguintes valores:</p>
+                                <ul>
+                                    <li>Psicólogo: R$ 150 - R$ 400 por sessão</li>
+                                    <li>Psiquiatra: R$ 300 - R$ 600 por consulta</li>
+                                </ul>
+                                <p>Muitos profissionais oferecem valores sociais para quem precisa. Não deixe de perguntar sobre essa possibilidade.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                            O plano de saúde cobre atendimento psicológico/psiquiátrico?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq6" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Sim, a maioria dos planos de saúde no Brasil cobre atendimento psicológico e psiquiátrico, conforme determinação da ANS (Agência Nacional de Saúde Suplementar). No entanto:</p>
+                                <ul>
+                                    <li>Psiquiatras são geralmente cobertos como especialistas médicos</li>
+                                    <li>Psicólogos podem ter cobertura limitada (consultas por ano)</li>
+                                    <li>É necessário verificar com seu plano o número de sessões cobertas</li>
+                                    <li>Algumas abordagens terapêuticas podem não ser cobertas</li>
+                                </ul>
+                                <p>Sempre consulte seu plano de saúde antes de marcar consultas para confirmar a cobertura.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categoria: Recursos -->
+                <div class="faq-category">
+                    <h3 class="faq-category-title"><i class="fas fa-book me-2"></i>Recursos e Materiais</h3>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7">
+                            Como posso acessar os materiais educativos?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq7" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Todos os nossos recursos educativos estão disponíveis gratuitamente na seção <a href="recursos.html">Recursos</a>. Lá você encontrará:</p>
+                                <ul>
+                                    <li>Artigos sobre diversos aspectos da saúde mental</li>
+                                    <li>Guias de autocuidado e bem-estar</li>
+                                    <li>Vídeos explicativos</li>
+                                    <li>Podcasts com especialistas</li>
+                                    <li>Exercícios práticos</li>
+                                </ul>
+                                <p>Não é necessário criar conta para acessar esses materiais, mas cadastrar-se permite salvar seus favoritos e receber atualizações.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8">
+                            Posso sugerir temas para novos conteúdos?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq8" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Sim, adoramos receber sugestões da nossa comunidade! Você pode:</p>
+                                <ol>
+                                    <li>Enviar um e-mail para sugestoes@monada.com.br</li>
+                                    <li>Preencher nosso <a href="#">formulário de sugestões</a></li>
+                                    <li>Comentar em nossas redes sociais</li>
+                                </ol>
+                                <p>Todas as sugestões são analisadas por nossa equipe, que prioriza os temas mais relevantes e solicitados.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9">
+                            Os materiais substituem a terapia profissional?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq9" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Não. Nossos recursos são desenvolvidos para:</p>
+                                <ul>
+                                    <li>Educar sobre saúde mental</li>
+                                    <li>Oferecer estratégias de autocuidado</li>
+                                    <li>Apoiar o tratamento profissional</li>
+                                    <li>Prevenir problemas de saúde mental</li>
+                                </ul>
+                                <p>Eles não devem ser usados como substitutos para diagnóstico ou tratamento profissional. Se você está enfrentando dificuldades significativas, recomendamos buscar ajuda de um especialista qualificado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categoria: Conta e Privacidade -->
+                <div class="faq-category">
+                    <h3 class="faq-category-title"><i class="fas fa-user-circle me-2"></i>Conta e Privacidade</h3>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10">
+                            Como criar uma conta no Portal Mônada?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq10" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Criar uma conta é simples e gratuito:</p>
+                                <ol>
+                                    <li>Clique em "Cadastre-se" no canto superior direito</li>
+                                    <li>Preencha com seu e-mail e crie uma senha segura</li>
+                                    <li>Confirme seu e-mail clicando no link que enviaremos</li>
+                                    <li>Complete seu perfil com informações básicas (opcional)</li>
+                                </ol>
+                                <p>Com uma conta, você pode salvar resultados de questionários, marcar favoritos e receber conteúdo personalizado.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq11" aria-expanded="false" aria-controls="faq11">
+                            Meus dados estão seguros?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq11" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Sim, levamos a segurança de seus dados muito a sério. Implementamos:</p>
+                                <ul>
+                                    <li>Criptografia de ponta a ponta para todas as comunicações</li>
+                                    <li>Armazenamento seguro em servidores protegidos</li>
+                                    <li>Políticas rígidas de acesso à informação</li>
+                                    <li>Conformidade total com a LGPD (Lei Geral de Proteção de Dados)</li>
+                                </ul>
+                                <p>Nunca compartilhamos seus dados pessoais sem sua autorização explícita. Para mais detalhes, leia nossa <a href="#">Política de Privacidade</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq12" aria-expanded="false" aria-controls="faq12">
+                            Como posso excluir minha conta?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="faq12" class="faq-answer collapse">
+                            <div class="faq-answer-content">
+                                <p>Para excluir sua conta e todos os dados associados:</p>
+                                <ol>
+                                    <li>Faça login em sua conta</li>
+                                    <li>Acesse "Configurações da Conta"</li>
+                                    <li>Role até a seção "Excluir Conta"</li>
+                                    <li>Confirme sua decisão</li>
+                                </ol>
+                                <p><strong>Atenção:</strong> Esta ação é irreversível e todos os seus dados serão permanentemente removidos de nossos sistemas em até 30 dias, conforme exigido pela LGPD.</p>
+                                <p>Se precisar apenas de uma pausa, considere desativar temporariamente sua conta em vez de excluí-la.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seção de Contato -->
+            <div id="contato" class="contact-card fade-in">
+                <h3 class="contact-title">Não encontrou sua dúvida?</h3>
+                <p class="mb-4">Entre em contato conosco e nossa equipe terá prazer em ajudar.</p>
+                
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>suporte@monada.com.br</span>
+                </div>
+                
+                <div class="contact-info">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>0800 123 4567 (Seg-Sex, 9h-18h)</span>
+                </div>
+                
+                <div class="contact-info">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Chat online em nosso site (Seg-Sex, 9h-17h)</span>
+                </div>
+                
+                <div class="d-flex gap-3 mt-4">
+                    <a href="#" class="btn btn-primary-custom">
+                        <i class="fas fa-paper-plane me-2"></i>Enviar Mensagem
+                    </a>
+                    <a href="#" class="btn btn-outline-custom">
+                        <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="recursos.html">Artigos</a></li>
+                        <li><a href="recursos.html">Ferramentas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inicializar tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+            
+            // Busca no FAQ
+            const faqSearch = document.getElementById('faqSearch');
+            if (faqSearch) {
+                faqSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const questions = document.querySelectorAll('.faq-question');
+                    
+                    questions.forEach(question => {
+                        const questionText = question.textContent.toLowerCase();
+                        const faqItem = question.closest('.faq-item');
+                        
+                        if (questionText.includes(searchTerm)) {
+                            faqItem.style.display = '';
+                        } else {
+                            faqItem.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+            
+            console.log('Página de FAQ carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>

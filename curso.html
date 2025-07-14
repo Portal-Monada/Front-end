@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Saúde Mental | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-section {
+            padding: 2.5rem 0;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background-color: var(--background-light);
+            padding: 1rem 0;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar-custom {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            transition: width 0.5s ease;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 150px;
+            height: calc(100vh - 150px);
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .chapter-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .chapter-item {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+
+        .chapter-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-link:hover {
+            background-color: var(--background-light);
+        }
+
+        .chapter-link.active {
+            background-color: rgba(74, 144, 226, 0.1);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .chapter-link.completed .chapter-title {
+            color: var(--accent-color);
+        }
+
+        .chapter-link.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .chapter-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .chapter-link.active .chapter-icon,
+        .chapter-link.completed .chapter-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+        }
+
+        .chapter-title {
+            font-weight: 500;
+            flex-grow: 1;
+        }
+
+        .chapter-duration {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-left: 1rem;
+        }
+
+        /* Content Area */
+        .content-area {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-title-main {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--background-light);
+        }
+
+        .chapter-content {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .quiz-container {
+            background-color: var(--background-light);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .quiz-question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quiz-option {
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-option label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+
+        .quiz-option label:hover {
+            background-color: rgba(74, 144, 226, 0.1);
+        }
+
+        .quiz-option input[type="radio"] {
+            margin-right: 1rem;
+        }
+
+        .quiz-option input[type="radio"]:hover {
+            cursor: pointer;
+        }
+
+        .quiz-submit {
+            margin-top: 1.5rem;
+        }
+
+        .quiz-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .quiz-result.success {
+            background-color: rgba(82, 196, 176, 0.2);
+            border-left: 5px solid var(--accent-color);
+            color: #155724;
+        }
+
+        .quiz-result.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-left: 5px solid #E74C3C;
+            color: #721c24;
+        }
+
+        .next-chapter-btn {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        /* Completion Screen */
+        .completion-screen {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .completion-icon {
+            font-size: 5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .completion-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .completion-text {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quiz-option label {
+            position: relative; /* Para posicionar o marcador de resposta correta */
+            transition: all 0.3s ease;
+        }
+
+        .correct-marker {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .chapter-link {
+                flex-wrap: wrap;
+            }
+
+            .chapter-duration {
+                margin-left: 0px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                width: 280px;
+                height: 100vh;
+                background-color: white;
+                z-index: 1100;
+                padding: 1rem;
+                transition: all 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .sidebar-toggle {
+                display: flex;
+                z-index: 1200;
+            }
+
+            .progress-container {
+                top: 72px;
+            }
+
+            .chapter-link {
+                flex-wrap: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chapter-title-main {
+                font-size: 1.8rem;
+            }
+            
+            .chapter-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html"><i class="fas fa-book me-1"></i>Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="glossario.html"><i class="fas fa-book-open me-1"></i>Glossário</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="curso.html"><i class="fas fa-graduation-cap me-1"></i>Curso</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Curso de Saúde Mental</h1>
+                    <p class="slide-in">Aprenda sobre saúde mental, bem-estar psicológico e estratégias de autocuidado em nosso curso completo.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#curso" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-play me-2"></i>Começar Curso
+                        </a>
+                        <a href="#sobre" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-info-circle me-2"></i>Sobre o Curso
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-graduation-cap" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Curso Section -->
+    <section id="sobre-curso" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Sobre o Curso</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                    <i class="fas fa-list-check text-primary fs-3"></i>
+                                </div>
+                                <h3 class="mb-0">Estrutura</h3>
+                            </div>
+                            <p class="card-text">O curso é dividido em 8 módulos progressivos, cada um com material de estudo, vídeos e questionários de avaliação. Você precisa obter pelo menos 70% em cada avaliação para desbloquear o próximo módulo.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                    <i class="fas fa-clock text-primary fs-3"></i>
+                                </div>
+                                <h3 class="mb-0">Duração</h3>
+                            </div>
+                            <p class="card-text">O curso pode ser concluído em aproximadamente 8-10 horas, dependendo do seu ritmo de estudo. Você pode pausar e retomar quando quiser, seu progresso será salvo automaticamente.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                    <i class="fas fa-certificate text-primary fs-3"></i>
+                                </div>
+                                <h3 class="mb-0">Certificado</h3>
+                            </div>
+                            <p class="card-text">Ao concluir todos os módulos e a avaliação final com nota mínima de 70%, você receberá um certificado de conclusão que pode ser compartilhado em seu perfil profissional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section id="curso" class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <div class="sidebar" id="sidebar">
+                        <div class="sidebar-card">
+                            <div class="sidebar-header">
+                                <i class="fas fa-list-ul me-2"></i>Capítulos
+                            </div>
+                            <ul class="chapter-list" id="chapter-list">
+                                <!-- Capítulos serão preenchidos via JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+                
+                <!-- Content Area -->
+                <div class="col-lg-9">
+                    <div class="content-area" id="content-area">
+                        <!-- Conteúdo será preenchido via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="container">
+            <div class="progress-text">Progresso do Curso: <span id="progress-percentage">0%</span></div>
+            <div class="progress-bar-custom">
+                <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="recursos.html">Artigos</a></li>
+                        <li><a href="glossario.html">Glossário</a></li>
+                        <li><a href="curso.html">Curso</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dados do curso
+        const curso = {
+            titulo: "Saúde Mental e Bem-Estar Psicológico",
+            descricao: "Este curso aborda os principais conceitos de saúde mental, estratégias de autocuidado e prevenção de transtornos psicológicos.",
+            capítulos: [
+                {
+                    id: 1,
+                    titulo: "Introdução à Saúde Mental",
+                    duracao: "10 min",
+                    tipo: "conteudo",
+                    aprovado: true,
+                    conteudo: `
+                        <h1 class="chapter-title-main">Introdução à Saúde Mental</h1>
+                        
+                        <div class="chapter-content">
+                            <p>Bem-vindo ao curso de Saúde Mental e Bem-Estar Psicológico. Neste primeiro capítulo, vamos explorar os conceitos básicos de saúde mental e sua importância no nosso dia a dia.</p>
+                            
+                            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pessoa meditando" class="img-fluid">
+                            
+                            <h2 class="chapter-subtitle">O que é Saúde Mental?</h2>
+                            <p>Saúde mental refere-se ao nosso bem-estar emocional, psicológico e social. Ela afeta como pensamos, sentimos e agimos quando enfrentamos a vida. Também ajuda a determinar como lidamos com o estresse, nos relacionamos com os outros e tomamos decisões.</p>
+                            
+                            <p>A saúde mental é importante em todas as fases da vida, desde a infância e adolescência até a idade adulta e velhice.</p>
+                            
+                            <h2 class="chapter-subtitle">Fatores que Influenciam a Saúde Mental</h2>
+                            <p>Vários fatores podem contribuir para problemas de saúde mental, incluindo:</p>
+                            <ul>
+                                <li>Fatores biológicos, como genes ou química cerebral</li>
+                                <li>Experiências de vida, como trauma ou abuso</li>
+                                <li>Histórico familiar de problemas de saúde mental</li>
+                                <li>Estilo de vida, como dieta, atividade física e uso de substâncias</li>
+                            </ul>
+                            
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/Y1qzm3UUTrg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    id: 2,
+                    titulo: "Avaliação: Conceitos Básicos",
+                    duracao: "5 min",
+                    tipo: "quiz",
+                    aprovado: false,
+                    perguntas: [
+                        {
+                            pergunta: "O que é saúde mental?",
+                            opcoes: [
+                                "Ausência de doenças mentais",
+                                "Bem-estar emocional, psicológico e social",
+                                "Capacidade de trabalhar sem parar",
+                                "Ter muitos amigos nas redes sociais"
+                            ],
+                            respostaCorreta: 1
+                        },
+                        {
+                            pergunta: "Qual destes NÃO é um fator que influencia a saúde mental?",
+                            opcoes: [
+                                "Genética",
+                                "Experiências de vida",
+                                "Cor dos olhos",
+                                "Estilo de vida"
+                            ],
+                            respostaCorreta: 2
+                        },
+                        {
+                            pergunta: "A saúde mental é importante apenas na idade adulta?",
+                            opcoes: [
+                                "Verdadeiro",
+                                "Falso"
+                            ],
+                            respostaCorreta: 1
+                        }
+                    ],
+                    pontuacaoMinima: 2 // 2 de 3 perguntas
+                },
+                {
+                    id: 3,
+                    titulo: "Transtornos de Ansiedade",
+                    duracao: "15 min",
+                    tipo: "conteudo",
+                    aprovado: false,
+                    conteudo: `
+                        <h1 class="chapter-title-main">Transtornos de Ansiedade</h1>
+                        
+                        <div class="chapter-content">
+                            <p>Os transtornos de ansiedade são um grupo de condições mentais caracterizadas por sentimentos excessivos de ansiedade e medo. Eles estão entre os problemas de saúde mental mais comuns.</p>
+                            
+                            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pessoa com ansiedade" class="img-fluid">
+                            
+                            <h2 class="chapter-subtitle">Tipos de Transtornos de Ansiedade</h2>
+                            <p>Existem vários tipos de transtornos de ansiedade, incluindo:</p>
+                            <ul>
+                                <li><strong>Transtorno de Ansiedade Generalizada (TAG):</strong> Preocupação excessiva e persistente sobre diversos aspectos da vida.</li>
+                                <li><strong>Transtorno do Pânico:</strong> Ataques súbitos de medo intenso que podem incluir palpitações, sudorese e sensação de perigo iminente.</li>
+                                <li><strong>Fobias Específicas:</strong> Medo intenso de objetos ou situações específicas, como altura ou aranhas.</li>
+                                <li><strong>Transtorno de Ansiedade Social:</strong> Medo intenso de situações sociais ou de desempenho.</li>
+                            </ul>
+                            
+                            <h2 class="chapter-subtitle">Sintomas Comuns</h2>
+                            <p>Os sintomas podem variar, mas geralmente incluem:</p>
+                            <ul>
+                                <li>Sensação de nervosismo, inquietação ou tensão</li>
+                                <li>Sensação de perigo iminente, pânico ou desgraça</li>
+                                <li>Aumento da frequência cardíaca</li>
+                                <li>Respiração rápida (hiperventilação)</li>
+                                <li>Sudorese</li>
+                                <li>Tremores</li>
+                                <li>Sensação de fraqueza ou cansaço</li>
+                            </ul>
+                            
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    id: 4,
+                    titulo: "Avaliação: Transtornos de Ansiedade",
+                    duracao: "5 min",
+                    tipo: "quiz",
+                    aprovado: false,
+                    perguntas: [
+                        {
+                            pergunta: "Qual destes NÃO é um tipo de transtorno de ansiedade?",
+                            opcoes: [
+                                "Transtorno de Ansiedade Generalizada",
+                                "Transtorno do Pânico",
+                                "Transtorno Bipolar",
+                                "Fobia Específica"
+                            ],
+                            respostaCorreta: 2
+                        },
+                        {
+                            pergunta: "Qual destes é um sintoma comum de transtornos de ansiedade?",
+                            opcoes: [
+                                "Aumento da frequência cardíaca",
+                                "Diminuição da sudorese",
+                                "Redução da tensão muscular",
+                                "Sono excessivo"
+                            ],
+                            respostaCorreta: 0
+                        }
+                    ],
+                    pontuacaoMinima: 1 // 1 de 2 perguntas
+                },
+                {
+                    id: 5,
+                    titulo: "Depressão: Compreendendo e Lidando",
+                    duracao: "20 min",
+                    tipo: "conteudo",
+                    aprovado: false,
+                    conteudo: `
+                        <h1 class="chapter-title-main">Depressão: Compreendendo e Lidando</h1>
+                        
+                        <div class="chapter-content">
+                            <p>A depressão é um transtorno de humor comum, mas sério, que causa sintomas graves que afetam como você se sente, pensa e lida com atividades diárias.</p>
+                            
+                            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pessoa com depressão" class="img-fluid">
+                            
+                            <h2 class="chapter-subtitle">Sintomas da Depressão</h2>
+                            <p>Os sintomas podem variar de leves a graves e podem incluir:</p>
+                            <ul>
+                                <li>Tristeza persistente, ansiedade ou "vazio"</li>
+                                <li>Sentimentos de desesperança ou pessimismo</li>
+                                <li>Irritabilidade</li>
+                                <li>Sentimentos de culpa, inutilidade ou desamparo</li>
+                                <li>Perda de interesse ou prazer em hobbies e atividades</li>
+                                <li>Diminuição de energia ou fadiga</li>
+                                <li>Dificuldade de concentração, lembrança ou tomada de decisões</li>
+                                <li>Insônia ou dormir demais</li>
+                                <li>Mudanças no apetite ou peso</li>
+                                <li>Pensamentos de morte ou suicídio</li>
+                            </ul>
+                            
+                            <h2 class="chapter-subtitle">Tratamentos Efetivos</h2>
+                            <p>A depressão, mesmo nos casos mais graves, pode ser tratada. Quanto mais cedo o tratamento começar, mais eficaz ele será. Os tratamentos incluem:</p>
+                            <ul>
+                                <li><strong>Medicamentos:</strong> Antidepressivos podem ajudar a modificar a química do cérebro que causa a depressão.</li>
+                                <li><strong>Psicoterapia:</strong> A terapia cognitivo-comportamental (TCC) e outras formas de terapia podem ajudar.</li>
+                                <li><strong>Terapia Eletroconvulsiva (TEC):</strong> Para casos graves que não respondem a outros tratamentos.</li>
+                                <li><strong>Mudanças no estilo de vida:</strong> Exercícios físicos, dieta saudável e sono regular podem ajudar.</li>
+                            </ul>
+                        </div>
+                    `
+                },
+                {
+                    id: 6,
+                    titulo: "Prova Final",
+                    duracao: "15 min",
+                    tipo: "quiz",
+                    aprovado: false,
+                    perguntas: [
+                        {
+                            pergunta: "Qual destes é um sintoma comum de depressão?",
+                            opcoes: [
+                                "Aumento de energia",
+                                "Tristeza persistente",
+                                "Apetite reduzido",
+                                "Ambas B e C"
+                            ],
+                            respostaCorreta: 3
+                        },
+                        {
+                            pergunta: "Qual destes tratamentos é eficaz para depressão?",
+                            opcoes: [
+                                "Antidepressivos",
+                                "Psicoterapia",
+                                "Mudanças no estilo de vida",
+                                "Todas as anteriores"
+                            ],
+                            respostaCorreta: 3
+                        },
+                        {
+                            pergunta: "Qual destes NÃO é um transtorno de ansiedade?",
+                            opcoes: [
+                                "Transtorno de Ansiedade Generalizada",
+                                "Transtorno do Pânico",
+                                "Transtorno Bipolar",
+                                "Fobia Social"
+                            ],
+                            respostaCorreta: 2
+                        },
+                        {
+                            pergunta: "A saúde mental inclui:",
+                            opcoes: [
+                                "Bem-estar emocional",
+                                "Bem-estar psicológico",
+                                "Bem-estar social",
+                                "Todas as anteriores"
+                            ],
+                            respostaCorreta: 3
+                        }
+                    ],
+                    pontuacaoMinima: 3 // 3 de 4 perguntas
+                },
+                {
+                    id: 7,
+                    titulo: "Conclusão do Curso",
+                    duracao: "5 min",
+                    tipo: "conclusao",
+                    aprovado: false,
+                    conteudo: `
+                        <div class="completion-screen">
+                            <div class="completion-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h1 class="completion-title">Parabéns!</h1>
+                            <p class="completion-text">Você completou com sucesso o curso de Saúde Mental e Bem-Estar Psicológico. Esperamos que este material tenha sido útil para você entender melhor esses importantes conceitos.</p>
+                            <a href="index.html" class="btn btn-primary-custom btn-lg px-4">
+                                <i class="fas fa-home me-2"></i>Voltar para a Página Inicial
+                            </a>
+                        </div>
+                    `
+                }
+            ]
+        };
+
+        // Estado do curso
+        let estadoCurso = {
+            capítulosCompletos: [], // IDs dos capítulos completos
+            respostasQuiz: {}, // Respostas dos quizzes
+            capítuloAtual: 1 // ID do capítulo atual
+        };
+
+        // Carregar estado do localStorage se existir
+        if (localStorage.getItem('estadoCurso')) {
+            estadoCurso = JSON.parse(localStorage.getItem('estadoCurso'));
+        }
+
+        // Função para salvar estado no localStorage
+        function salvarEstado() {
+            localStorage.setItem('estadoCurso', JSON.stringify(estadoCurso));
+        }
+
+        // Função para calcular progresso
+        function calcularProgresso() {
+            const totalCapítulos = curso.capítulos.length;
+            const capítulosCompletos = estadoCurso.capítulosCompletos.length;
+            const progresso = totalCapítulos > 0 ? Math.round((capítulosCompletos / totalCapítulos) * 100) : 0;
+            
+            document.getElementById('progress-bar').style.width = `${progresso}%`;
+            document.getElementById('progress-percentage').textContent = `${progresso}%`;
+            
+            return progresso;
+        }
+
+        // Função para renderizar a lista de capítulos
+        function renderizarListaCapítulos() {
+            const lista = document.getElementById('chapter-list');
+            lista.innerHTML = '';
+            
+            curso.capítulos.forEach(cap => {
+                const li = document.createElement('li');
+                li.className = 'chapter-item';
+                
+                const a = document.createElement('a');
+                a.className = 'chapter-link';
+                
+                // Verificar se o capítulo está disponível
+                const capítuloAnterior = curso.capítulos.find(c => c.id === cap.id - 1);
+                const capítuloAnteriorAprovado = !capítuloAnterior || estadoCurso.capítulosCompletos.includes(capítuloAnterior.id);
+                
+                if (cap.id > 1 && !capítuloAnteriorAprovado) {
+                    a.className += ' locked';
+                    a.href = '#';
+                    a.onclick = (e) => {
+                        e.preventDefault();
+                        alert('Complete o capítulo anterior para desbloquear este conteúdo.');
+                    };
+                } else {
+                    a.href = '#';
+                    a.onclick = (e) => {
+                        e.preventDefault();
+                        carregarCapítulo(cap.id, true);
+                    };
+                }
+                
+                if (estadoCurso.capítulosCompletos.includes(cap.id)) {
+                    a.className += ' completed';
+                }
+                
+                if (cap.id === estadoCurso.capítuloAtual) {
+                    a.className += ' active';
+                }
+                
+                a.innerHTML = `
+                    <div class="chapter-icon">
+                        ${cap.tipo === 'quiz' ? '<i class="fas fa-question"></i>' : 
+                          cap.tipo === 'conclusao' ? '<i class="fas fa-trophy"></i>' : 
+                          '<i class="fas fa-book"></i>'}
+                    </div>
+                    <div class="chapter-title">${cap.titulo}</div>
+                    <div class="chapter-duration">${cap.duracao}</div>
+                `;
+                
+                li.appendChild(a);
+                lista.appendChild(li);
+            });
+        }
+
+        // Função para carregar um capítulo
+        function carregarCapítulo(id, scroll = false) {
+            const capítulo = curso.capítulos.find(c => c.id === id);
+            if (!capítulo) return;
+            
+            estadoCurso.capítuloAtual = id;
+            salvarEstado();
+            renderizarListaCapítulos();
+            
+            const contentArea = document.getElementById('content-area');
+            
+            if (capítulo.tipo === 'conteudo') {
+                contentArea.innerHTML = capítulo.conteudo;
+                
+                // Adicionar botão de próximo capítulo
+                const próximoCapítulo = curso.capítulos.find(c => c.id === id + 1);
+                if (próximoCapítulo) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-primary-custom next-chapter-btn';
+                    btn.innerHTML = '<i class="fas fa-arrow-right me-2"></i>Próximo Capítulo';
+                    btn.onclick = () => {
+                        if (!estadoCurso.capítulosCompletos.includes(id)) {
+                            estadoCurso.capítulosCompletos.push(id);
+                            salvarEstado();
+                            calcularProgresso();
+                            renderizarListaCapítulos();
+                        }
+                        carregarCapítulo(id + 1, true);
+                    };
+                    
+                    contentArea.appendChild(btn);
+                    btn.style.display = 'block';
+                }
+            } 
+            else if (capítulo.tipo === 'quiz') {
+                contentArea.innerHTML = `
+                    <h1 class="chapter-title-main">${capítulo.titulo}</h1>
+                    <div class="chapter-content">
+                        <p>Responda as perguntas abaixo para testar seu conhecimento. Você precisa acertar pelo menos ${capítulo.pontuacaoMinima} de ${capítulo.perguntas.length} perguntas para avançar.</p>
+                    </div>
+                    <form id="quiz-form">
+                        ${capítulo.perguntas.map((pergunta, i) => `
+                            <div class="quiz-container">
+                                <div class="quiz-question">${i + 1}. ${pergunta.pergunta}</div>
+                                <ul class="quiz-options">
+                                    ${pergunta.opcoes.map((opcao, j) => `
+                                        <li class="quiz-option">
+                                            <label>
+                                                <input type="radio" name="pergunta-${i}" value="${j}" ${estadoCurso.respostasQuiz[id] && estadoCurso.respostasQuiz[id][i] === j ? 'checked' : ''}>
+                                                ${opcao}
+                                            </label>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
+                        <button type="submit" class="btn btn-primary-custom quiz-submit">
+                            <i class="fas fa-paper-plane me-2"></i>Enviar Respostas
+                        </button>
+                        <div id="quiz-result" class="quiz-result"></div>
+                    </form>
+                `;
+                
+                document.getElementById('quiz-form').onsubmit = (e) => {
+                    e.preventDefault();
+                    verificarRespostasQuiz(id, capítulo);
+                };
+            }
+            else if (capítulo.tipo === 'conclusao') {
+                contentArea.innerHTML = capítulo.conteudo;
+                
+                if (!estadoCurso.capítulosCompletos.includes(id)) {
+                    estadoCurso.capítulosCompletos.push(id);
+                    salvarEstado();
+                    calcularProgresso();
+                    renderizarListaCapítulos();
+                }
+            }
+
+            // Adiciona o scroll apenas se o parâmetro scroll for true
+            if (scroll) {
+                const cursoSection = document.getElementById('curso');
+                const posicao = cursoSection.getBoundingClientRect().top + window.pageYOffset - 100;
+                
+                window.scrollTo({
+                    top: posicao,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Função para verificar respostas do quiz
+        function verificarRespostasQuiz(id, capítulo) {
+            const form = document.getElementById('quiz-form');
+            const resultDiv = document.getElementById('quiz-result');
+            
+            // Remover botão de próximo capítulo existente
+            const existingNextBtn = form.querySelector('.next-chapter-btn');
+            if (existingNextBtn) {
+                form.removeChild(existingNextBtn);
+            }
+            
+            let respostas = {};
+            let pontuacao = 0;
+            let perguntasErradas = [];
+            
+            // Limpar marcações anteriores
+            const allOptions = form.querySelectorAll('.quiz-option label');
+            allOptions.forEach(option => {
+                option.style.border = '1px solid #dee2e6';
+                const existingMarker = option.querySelector('.correct-marker');
+                if (existingMarker) {
+                    option.removeChild(existingMarker);
+                }
+            });
+            
+            capítulo.perguntas.forEach((pergunta, i) => {
+                const selectedOption = form.querySelector(`input[name="pergunta-${i}"]:checked`);
+                
+                if (selectedOption) {
+                    respostas[i] = parseInt(selectedOption.value);
+                    
+                    if (parseInt(selectedOption.value) === pergunta.respostaCorreta) {
+                        pontuacao++;
+                    } else {
+                        perguntasErradas.push(i);
+                    }
+                } else {
+                    perguntasErradas.push(i);
+                }
+            });
+            
+            estadoCurso.respostasQuiz[id] = respostas;
+            salvarEstado();
+            
+            // Destacar perguntas erradas e mostrar respostas corretas
+            perguntasErradas.forEach(i => {
+                const selectedOption = form.querySelector(`input[name="pergunta-${i}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.parentElement.style.border = '2px solid #E74C3C';
+                }
+                
+                const correctOption = form.querySelector(`input[name="pergunta-${i}"][value="${capítulo.perguntas[i].respostaCorreta}"]`);
+                if (correctOption) {
+                    correctOption.parentElement.style.border = '2px solid #52C4B0';
+                    if (!correctOption.parentElement.querySelector('.correct-marker')) {
+                        correctOption.parentElement.insertAdjacentHTML('beforeend', 
+                            '<span class="correct-marker" style="color:#52C4B0; margin-left:10px;"><i class="fas fa-check-circle"></i> Correta</span>');
+                    }
+                }
+            });
+            
+            // Mostrar resultado
+            if (pontuacao >= capítulo.pontuacaoMinima) {
+                resultDiv.className = 'quiz-result success';
+                resultDiv.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    Parabéns! Você acertou ${pontuacao} de ${capítulo.perguntas.length} perguntas e pode avançar para o próximo capítulo.
+                `;
+                
+                if (!estadoCurso.capítulosCompletos.includes(id)) {
+                    estadoCurso.capítulosCompletos.push(id);
+                    salvarEstado();
+                    calcularProgresso();
+                    renderizarListaCapítulos();
+                }
+                
+                // Criar botão para próximo capítulo (apenas um)
+                const próximoCapítulo = curso.capítulos.find(c => c.id === id + 1);
+                if (próximoCapítulo) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-primary-custom next-chapter-btn';
+                    btn.innerHTML = '<i class="fas fa-arrow-right me-2"></i>Próximo Capítulo';
+                    btn.onclick = () => carregarCapítulo(id + 1, true);
+                    
+                    form.appendChild(btn);
+                    btn.style.display = 'block';
+                }
+            } else {
+                resultDiv.className = 'quiz-result error';
+                resultDiv.innerHTML = `
+                    <i class="fas fa-times-circle me-2"></i>
+                    Você acertou ${pontuacao} de ${capítulo.perguntas.length} perguntas. É necessário acertar pelo menos ${capítulo.pontuacaoMinima} para avançar. As respostas erradas estão marcadas em vermelho e as corretas em verde.
+                `;
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Inicializar curso quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar toggle da sidebar
+            document.getElementById('sidebar-toggle').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+            });
+            
+            // Fechar sidebar ao clicar fora
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('sidebar');
+                const sidebarToggle = document.getElementById('sidebar-toggle');
+                
+                if (!sidebar.contains(event.target) && event.target !== sidebarToggle && !sidebarToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            });
+            
+            // Calcular e mostrar progresso
+            calcularProgresso();
+            
+            // Renderizar lista de capítulos
+            renderizarListaCapítulos();
+            
+            // Carregar capítulo atual
+            carregarCapítulo(estadoCurso.capítuloAtual, false);
+            
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1 && href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

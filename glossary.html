@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário de Saúde Mental | Portal Mônada</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2E5266;
+            --secondary-color: #4A90E2;
+            --accent-color: #52C4B0;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+
+        .crisis-btn {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .crisis-btn:hover {
+            background: linear-gradient(45deg, #C0392B, #A93226);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><circle cx="100" cy="50" r="20"/><circle cx="300" cy="20" r="15"/><circle cx="500" cy="80" r="25"/><circle cx="700" cy="30" r="18"/><circle cx="900" cy="60" r="22"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Content Cards */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Estilos específicos para glossário */
+        .glossario-section {
+            background-color: var(--background-light);
+            padding-bottom: 3rem;
+            padding-top: 3rem;
+        }
+
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .filter-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .letra-filtro {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .letra-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            border: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .letra-btn:hover, .letra-btn.active {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+        }
+
+        .letra-btn.todas {
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 20px;
+        }
+
+        .termo-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .termo-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .termo-letra {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .termo-titulo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .termo-descricao {
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .nenhum-termo {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .nenhum-termo i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Botões */
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Adicionar estilos de paginação */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 0.5rem;
+        }
+        
+        .page-item {
+            margin: 0;
+        }
+        
+        .page-link {
+            display: block;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .page-link:hover {
+            background-color: var(--background-light);
+        }
+        
+        .page-item.active .page-link {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border-color: transparent;
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .letra-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .brain {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content,
+            .footer > .container > .row {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl navbar-dark">
+                <a class="navbar-brand logo" href="index.html"><i class="fas fa-brain me-2"></i>Mônada</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="questionarios.html"><i class="fas fa-clipboard-list me-1"></i>Questionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profissionais.html"><i class="fas fa-users me-1"></i>Profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html"><i class="fas fa-book me-1"></i>Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="glossario.html"><i class="fas fa-book-open me-1"></i>Glossário</a>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="crisis-btn me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Emergência
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="slide-in">Glossário de Saúde Mental</h1>
+                    <p class="slide-in">Termos e conceitos importantes para entender melhor a saúde mental e o bem-estar psicológico.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#glossario" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-book-open me-2"></i>Ver Termos
+                        </a>
+                        <a href="#como-usar" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-info-circle me-2"></i>Como Usar
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center brain">
+                    <i class="fas fa-book" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Usar Section -->
+    <section id="como-usar" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Como Usar o Glossário</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="card-title">Busca Rápida</h3>
+                            <p class="card-text">Use a barra de pesquisa para encontrar termos específicos no glossário.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <h3 class="card-title">Filtro por Letra</h3>
+                            <p class="card-text">Selecione uma letra para ver apenas os termos que começam com ela.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-sort-alpha-down"></i>
+                            </div>
+                            <h3 class="card-title">Ordem Alfabética</h3>
+                            <p class="card-text">Todos os termos estão organizados em ordem alfabética para fácil navegação.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card content-card">
+                        <div class="card-body p-4">
+                            <div class="card-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3 class="card-title">Definições Claras</h3>
+                            <p class="card-text">Explicações simples e diretas para termos técnicos da área de saúde mental.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Glossário Section -->
+    <section id="glossario" class="glossario-section">
+        <div class="container">
+            <h2 class="section-title mb-3">Glossário de Saúde Mental</h2>
+            <p class="text-center mb-5">Explore os termos e conceitos importantes da área de saúde mental</p>
+            
+            <div class="row">
+                <!-- Filtros -->
+                <div class="col-lg-3 mb-4">
+                    <div class="card search-filter-card">
+                        <div class="card-body">
+                            <h4 class="filter-title mb-3">
+                                <i class="fas fa-filter me-2"></i>Filtrar Termos
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label for="buscaTermo" class="form-label">Pesquisar:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="buscaTermo" placeholder="Digite um termo...">
+                                    <button class="btn btn-primary-custom" id="btnBuscar">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Filtrar por letra:</label>
+                                <div class="letra-filtro">
+                                    <button class="letra-btn todas active" data-letra="todas">Todas</button>
+                                    <button class="letra-btn" data-letra="A">A</button>
+                                    <button class="letra-btn" data-letra="B">B</button>
+                                    <button class="letra-btn" data-letra="C">C</button>
+                                    <button class="letra-btn" data-letra="D">D</button>
+                                    <button class="letra-btn" data-letra="E">E</button>
+                                    <button class="letra-btn" data-letra="F">F</button>
+                                    <button class="letra-btn" data-letra="G">G</button>
+                                    <button class="letra-btn" data-letra="H">H</button>
+                                    <button class="letra-btn" data-letra="I">I</button>
+                                    <button class="letra-btn" data-letra="J">J</button>
+                                    <button class="letra-btn" data-letra="K">K</button>
+                                    <button class="letra-btn" data-letra="L">L</button>
+                                    <button class="letra-btn" data-letra="M">M</button>
+                                    <button class="letra-btn" data-letra="N">N</button>
+                                    <button class="letra-btn" data-letra="O">O</button>
+                                    <button class="letra-btn" data-letra="P">P</button>
+                                    <button class="letra-btn" data-letra="Q">Q</button>
+                                    <button class="letra-btn" data-letra="R">R</button>
+                                    <button class="letra-btn" data-letra="S">S</button>
+                                    <button class="letra-btn" data-letra="T">T</button>
+                                    <button class="letra-btn" data-letra="U">U</button>
+                                    <button class="letra-btn" data-letra="V">V</button>
+                                    <button class="letra-btn" data-letra="W">W</button>
+                                    <button class="letra-btn" data-letra="X">X</button>
+                                    <button class="letra-btn" data-letra="Y">Y</button>
+                                    <button class="letra-btn" data-letra="Z">Z</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Categoria:</label>
+                                <select class="form-select" id="categoriaTermo">
+                                    <option value="todas">Todas</option>
+                                    <option value="condicao">Condições</option>
+                                    <option value="tratamento">Tratamentos</option>
+                                    <option value="terapia">Terapias</option>
+                                    <option value="conceito">Conceitos</option>
+                                    <option value="medicamento">Medicamentos</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Itens por página:</label>
+                                <select class="form-select" id="itensPorPagina">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn btn-primary-custom w-100" id="aplicarFiltros">
+                                <i class="fas fa-filter me-2"></i>Aplicar Filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Termos -->
+                <div class="col-lg-9">
+                    <div id="listaTermos">
+                        <!-- Termos serão carregados aqui via JavaScript -->
+                    </div>
+                </div>
+                <!-- Paginação -->
+                <div class="pagination-container" id="paginacaoContainer">
+                    <ul class="pagination" id="paginacao">
+                        <!-- Paginação será gerada via JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-brain me-2"></i>Portal Mônada</h5>
+                    <p class="text-light">Dedicado à promoção da saúde mental e prevenção de comportamentos aditivos através de recursos confiáveis e apoio especializado.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="questionarios.html">Questionários</a></li>
+                        <li><a href="profissionais.html">Profissionais</a></li>
+                        <li><a href="recursos.html">Artigos</a></li>
+                        <li><a href="glossario.html">Glossário</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Sobre</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nossa Missão</a></li>
+                        <li><a href="#">Equipe</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">LGPD</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Portal Mônada. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <i class="fas fa-phone me-1"></i> 0800 123 4567 |
+                        <i class="fas fa-envelope me-1 ms-2"></i> contato@monada.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dados do glossário
+        const termosGlossario = [
+            { termo: "Ansiedade", letra: "A", categoria: "condicao", descricao: "Estado emocional caracterizado por sentimentos de tensão, preocupação e alterações físicas como aumento da pressão arterial." },
+            { termo: "Alternância", letra: "A", categoria: "condicao", descricao: "Estado emocional caracterizado por sentimentos de tensão, preocupação e alterações físicas como aumento da pressão arterial." },
+            { termo: "Bulimia", letra: "B", categoria: "condicao", descricao: "Transtorno alimentar caracterizado por episódios de compulsão alimentar seguidos de comportamentos compensatórios inadequados." },
+            { termo: "Cognição", letra: "C", categoria: "conceito", descricao: "Processos mentais que incluem atenção, memória, linguagem, raciocínio e resolução de problemas." },
+            { termo: "Depressão", letra: "D", categoria: "condicao", descricao: "Transtorno de humor caracterizado por tristeza persistente e perda de interesse em atividades." },
+            { termo: "Estresse", letra: "E", categoria: "condicao", descricao: "Resposta física e emocional a desafios ou demandas da vida." },
+            { termo: "Fluoxetina", letra: "F", categoria: "medicamento", descricao: "Medicamento antidepressivo da classe dos inibidores seletivos da recaptação de serotonina (ISRS)." },
+            { termo: "Grupo de Apoio", letra: "G", categoria: "tratamento", descricao: "Reuniões de pessoas que compartilham experiências semelhantes para oferecer apoio mútuo." },
+            { termo: "Hipnose", letra: "H", categoria: "terapia", descricao: "Estado de consciência alterado usado em terapia para acessar o subconsciente." },
+            { termo: "Insônia", letra: "I", categoria: "condicao", descricao: "Dificuldade em adormecer ou manter o sono, resultando em sono não reparador." },
+            { termo: "Jogo Patológico", letra: "J", categoria: "condicao", descricao: "Comportamento de jogo persistente e recorrente que prejudica a vida pessoal e profissional." },
+            { termo: "Kleptomania", letra: "K", categoria: "condicao", descricao: "Incapacidade recorrente de resistir a impulsos de furtar objetos desnecessários." },
+            { termo: "Luto", letra: "L", categoria: "conceito", descricao: "Processo emocional de enfrentamento da perda de alguém ou algo importante." },
+            { termo: "Mindfulness", letra: "M", categoria: "terapia", descricao: "Prática de atenção plena ao momento presente, sem julgamento." },
+            { termo: "Neurose", letra: "N", categoria: "condicao", descricao: "Termo antigo para descrever transtornos mentais sem perda de contato com a realidade." },
+            { termo: "Obsessão", letra: "O", categoria: "condicao", descricao: "Pensamento, impulso ou imagem recorrente e persistente que causa ansiedade." },
+            { termo: "Psicoterapia", letra: "P", categoria: "terapia", descricao: "Tratamento de problemas emocionais e mentais através de métodos psicológicos." },
+            { termo: "Qualidade de Vida", letra: "Q", categoria: "conceito", descricao: "Percepção do indivíduo sobre sua posição na vida no contexto de sua cultura e sistema de valores." },
+            { termo: "Resiliência", letra: "R", categoria: "conceito", descricao: "Capacidade de se adaptar e se recuperar diante de adversidades." },
+            { termo: "Sertralina", letra: "S", categoria: "medicamento", descricao: "Medicamento antidepressivo da classe dos inibidores seletivos da recaptação de serotonina (ISRS)." },
+            { termo: "Transtorno Bipolar", letra: "T", categoria: "condicao", descricao: "Condição mental caracterizada por alternância entre episódios de depressão e mania." },
+            { termo: "Uso de Substâncias", letra: "U", categoria: "condicao", descricao: "Padrão problemático de uso de álcool ou outras drogas que causa prejuízo significativo." },
+            { termo: "Validação Emocional", letra: "V", categoria: "conceito", descricao: "Processo de reconhecer, aceitar e expressar compreensão das experiências emocionais de outra pessoa." },
+            { termo: "Well-being", letra: "W", categoria: "conceito", descricao: "Estado de estar confortável, saudável ou feliz, englobando bem-estar físico e mental." },
+            { termo: "Xenofobia", letra: "X", categoria: "condicao", descricao: "Medo ou aversão intensa a pessoas de outros países ou culturas." },
+            { termo: "Yoga", letra: "Y", categoria: "terapia", descricao: "Prática que combina posturas físicas, exercícios respiratórios e meditação para promover saúde mental e física." },
+            { termo: "Zumbido", letra: "Z", categoria: "condicao", descricao: "Percepção de som na ausência de fonte sonora externa, muitas vezes associado a estresse e ansiedade." }
+        ];
+
+        // Variáveis de estado para paginação
+        let currentPage = 1;
+        let itemsPerPage = 10;
+        let currentLetterFilter = 'todas';
+        let currentSearchTerm = '';
+        let currentCategoryFilter = 'todas';
+
+        // Função para renderizar os termos do glossário com paginação
+        function renderizarTermos(page = 1) {
+            const container = document.getElementById('listaTermos');
+            const paginationContainer = document.getElementById('paginacao');
+            
+            container.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            
+            // Atualizar variáveis de estado
+            currentPage = page;
+            itemsPerPage = parseInt(document.getElementById('itensPorPagina').value);
+            currentLetterFilter = document.querySelector('.letra-btn.active').dataset.letra;
+            currentSearchTerm = document.getElementById('buscaTermo').value;
+            currentCategoryFilter = document.getElementById('categoriaTermo').value;
+            
+            // Filtrar termos
+            let termosFiltrados = termosGlossario.filter(termo => {
+                const letraMatch = currentLetterFilter === 'todas' || termo.letra === currentLetterFilter;
+                const buscaMatch = termo.termo.toLowerCase().includes(currentSearchTerm.toLowerCase()) || 
+                                  termo.descricao.toLowerCase().includes(currentSearchTerm.toLowerCase());
+                const categoriaMatch = currentCategoryFilter === 'todas' || termo.categoria === currentCategoryFilter;
+                
+                return letraMatch && buscaMatch && categoriaMatch;
+            });
+            
+            // Ordenar alfabeticamente
+            termosFiltrados.sort((a, b) => a.termo.localeCompare(b.termo));
+            
+            // Calcular total de páginas
+            const totalPages = Math.ceil(termosFiltrados.length / itemsPerPage);
+            
+            // Ajustar página atual se necessário
+            currentPage = Math.max(1, Math.min(currentPage, totalPages));
+            
+            // Calcular índices dos itens a serem exibidos
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, termosFiltrados.length);
+            const termosPagina = termosFiltrados.slice(startIndex, endIndex);
+            
+            if (termosFiltrados.length === 0) {
+                container.innerHTML = `
+                    <div class="nenhum-termo">
+                        <i class="fas fa-book-open"></i>
+                        <h4>Nenhum termo encontrado</h4>
+                        <p>Tente ajustar os filtros de busca</p>
+                    </div>
+                `;
+                document.getElementById('paginacaoContainer').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('paginacaoContainer').style.display = 'flex';
+            
+            // Agrupar por letra apenas os termos da página atual
+            const termosPorLetra = {};
+            termosPagina.forEach(termo => {
+                if (!termosPorLetra[termo.letra]) {
+                    termosPorLetra[termo.letra] = [];
+                }
+                termosPorLetra[termo.letra].push(termo);
+            });
+            
+            // Renderizar termos agrupados
+            for (const letra in termosPorLetra) {
+                const termosDaLetra = termosPorLetra[letra];
+                
+                // Adicionar cabeçalho da letra
+                const letraHeader = document.createElement('div');
+                letraHeader.className = 'd-flex align-items-center mb-3';
+                letraHeader.innerHTML = `
+                    <div class="termo-letra">${letra}</div>
+                    <h3 class="mb-0" style="color: var(--primary-color);">${letra}</h3>
+                `;
+                container.appendChild(letraHeader);
+                
+                // Adicionar termos da letra
+                termosDaLetra.forEach(termo => {
+                    const termoCard = document.createElement('div');
+                    termoCard.className = 'termo-card';
+                    termoCard.innerHTML = `
+                        <h4 class="termo-titulo">${termo.termo}</h4>
+                        <span class="badge bg-primary mb-2">${getCategoriaNome(termo.categoria)}</span>
+                        <p class="termo-descricao">${termo.descricao}</p>
+                    `;
+                    container.appendChild(termoCard);
+                });
+            }
+            
+            // Renderizar paginação
+            renderizarPaginacao(totalPages);
+        }
+
+        // Função para renderizar a paginação
+        function renderizarPaginacao(totalPages) {
+            const paginationContainer = document.getElementById('paginacao');
+            
+            // Botão Anterior
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#" aria-label="Anterior">&laquo;</a>`;
+            prevItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    renderizarTermos(currentPage - 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            paginationContainer.appendChild(prevItem);
+            
+            // Números das páginas
+            const maxVisiblePages = 5; // Número máximo de páginas visíveis na paginação
+            let startPage, endPage;
+            
+            if (totalPages <= maxVisiblePages) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+                const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+                
+                if (currentPage <= maxPagesBeforeCurrent) {
+                    startPage = 1;
+                    endPage = maxVisiblePages;
+                } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+                    startPage = totalPages - maxVisiblePages + 1;
+                    endPage = totalPages;
+                } else {
+                    startPage = currentPage - maxPagesBeforeCurrent;
+                    endPage = currentPage + maxPagesAfterCurrent;
+                }
+            }
+            
+            // Adicionar botão para primeira página se necessário
+            if (startPage > 1) {
+                const firstPageItem = document.createElement('li');
+                firstPageItem.className = 'page-item';
+                firstPageItem.innerHTML = `<a class="page-link" href="#">1</a>`;
+                firstPageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarTermos(1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(firstPageItem);
+                
+                if (startPage > 2) {
+                    const ellipsisItem = document.createElement('li');
+                    ellipsisItem.className = 'page-item disabled';
+                    ellipsisItem.innerHTML = `<span class="page-link">...</span>`;
+                    paginationContainer.appendChild(ellipsisItem);
+                }
+            }
+            
+            // Adicionar páginas visíveis
+            for (let i = startPage; i <= endPage; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarTermos(i);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(pageItem);
+            }
+            
+            // Adicionar botão para última página se necessário
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsisItem = document.createElement('li');
+                    ellipsisItem.className = 'page-item disabled';
+                    ellipsisItem.innerHTML = `<span class="page-link">...</span>`;
+                    paginationContainer.appendChild(ellipsisItem);
+                }
+                
+                const lastPageItem = document.createElement('li');
+                lastPageItem.className = 'page-item';
+                lastPageItem.innerHTML = `<a class="page-link" href="#">${totalPages}</a>`;
+                lastPageItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderizarTermos(totalPages);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(lastPageItem);
+            }
+            
+            // Botão Próximo
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#" aria-label="Próximo">&raquo;</a>`;
+            nextItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    renderizarTermos(currentPage + 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            paginationContainer.appendChild(nextItem);
+        }
+
+        // Função auxiliar para obter nome da categoria (manter igual)
+        function getCategoriaNome(categoria) {
+            const categorias = {
+                'condicao': 'Condição',
+                'tratamento': 'Tratamento',
+                'terapia': 'Terapia',
+                'conceito': 'Conceito',
+                'medicamento': 'Medicamento'
+            };
+            return categorias[categoria] || categoria;
+        }
+
+        // Configurar eventos dos filtros
+        document.getElementById('aplicarFiltros').addEventListener('click', function() {
+            renderizarTermos(1); // Sempre voltar para a página 1 ao aplicar filtros
+        });
+
+        // Configurar evento de busca ao pressionar Enter
+        document.getElementById('buscaTermo').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                renderizarTermos(1);
+            }
+        });
+
+        // Configurar botão de busca
+        document.getElementById('btnBuscar').addEventListener('click', function() {
+            renderizarTermos(1);
+        });
+
+        // Configurar botões de letra
+        document.querySelectorAll('.letra-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.letra-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderizarTermos(1);
+            });
+        });
+
+        // Configurar mudança de itens por página
+        document.getElementById('itensPorPagina').addEventListener('change', function() {
+            renderizarTermos(1);
+        });
+
+        // Inicializar glossário quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarTermos(1);
+            
+            // Efeito de scroll para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Efeito no header ao scrollar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(46, 82, 102, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            // Fechar ao clicar fora da navbar
+            document.addEventListener('click', function(event) {
+                const isClickInsideNavbar = document.querySelector('.navbar').contains(event.target);
+                const isNavbarToggler = event.target === navbarToggler || navbarToggler.contains(event.target);
+                
+                if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+            
+            console.log('Página de glossário carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenteBem Diário</title>
+    <style>
+        :root {
+            --primary: #5e72e4;
+            --success: #2dce89;
+            --warning: #fb6340;
+            --danger: #f5365c;
+            --info: #11cdef;
+            --neutral: #8898aa;
+            --background: #f8f9fe;
+            --card: #ffffff;
+            --text: #32325d;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .header {
+            background-color: var(--card);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .btn-neutral {
+            background-color: var(--neutral);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .mood-selector {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .mood-option {
+            text-align: center;
+            cursor: pointer;
+            padding: 0.5rem 0.3rem;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            flex: 1 0 calc(20% - 0.5rem);
+            min-width: 0; /* Permite que o texto quebre corretamente */
+            box-sizing: border-box;
+        }
+
+        .mood-icon {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .mood-option div:not(.mood-icon) {
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
+            line-height: 1.2;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            padding: 0 0.2rem;
+        }
+
+        @media (max-width: 500px) {
+            .mood-option {
+                flex: 1 0 calc(33% - 0.5rem);
+            }
+        }
+
+        @media (max-width: 350px) {
+            .mood-option {
+                flex: 1 0 calc(50% - 0.5rem);
+            }
+        }
+
+        .mood-option:hover {
+            background-color: rgba(94, 114, 228, 0.1);
+        }
+
+        .mood-option.selected {
+            background-color: rgba(94, 114, 228, 0.2);
+        }
+
+        .mood-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .tab {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .goal-info {
+            flex-grow: 1;
+        }
+
+        .goal-title {
+            font-weight: 600;
+        }
+
+        .goal-due {
+            font-size: 0.8rem;
+            color: var(--neutral);
+        }
+
+        .goal-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .reminder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .reminder-info {
+            flex-grow: 1;
+        }
+
+        .reminder-title {
+            font-weight: 600;
+        }
+
+        .reminder-time {
+            font-size: 0.8rem;
+            color: var(--neutral);
+        }
+
+        .reminder-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-top: 1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+            animation: modalIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .discreet-mode {
+            background-color: #fff !important;
+            color: #333 !important;
+        }
+
+        .discreet-mode .header {
+            background-color: #f8f9fa !important;
+        }
+
+        .discreet-mode .logo {
+            color: #333 !important;
+        }
+
+        .discreet-mode .card {
+            background-color: #f8f9fa !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mood-selector {
+                flex-wrap: wrap;
+            }
+            
+            .mood-option {
+                width: 18%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span>📊</span> MenteBem Diário
+            </div>
+            <button id="discreetModeBtn" class="btn btn-neutral">Modo Discreto</button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Check-in Diário</div>
+                <div id="currentDate"></div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <div class="form-label">Como você está se sentindo hoje?</div>
+                    <div class="mood-selector">
+                        <div class="mood-option" data-mood="5">
+                            <div class="mood-icon">😄</div>
+                            <div>Excelente</div>
+                        </div>
+                        <div class="mood-option" data-mood="4">
+                            <div class="mood-icon">🙂</div>
+                            <div>Bem</div>
+                        </div>
+                        <div class="mood-option" data-mood="3">
+                            <div class="mood-icon">😐</div>
+                            <div>Neutro</div>
+                        </div>
+                        <div class="mood-option" data-mood="2">
+                            <div class="mood-icon">😕</div>
+                            <div>Mal</div>
+                        </div>
+                        <div class="mood-option" data-mood="1">
+                            <div class="mood-icon">😢</div>
+                            <div>Péssimo</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="notes">Notas (opcional)</label>
+                    <textarea id="notes" class="form-control" rows="3" placeholder="Como foi seu dia? Algo importante aconteceu?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Comportamentos hoje:</label>
+                    <div id="behaviors" class="form-group">
+                        <!-- Checkboxes gerados pelo JavaScript -->
+                    </div>
+                </div>
+                <button id="saveCheckIn" class="btn btn-primary">Salvar Check-in</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="goals">Metas</div>
+            <div class="tab" data-tab="reminders">Lembretes</div>
+            <div class="tab" data-tab="progress">Progresso</div>
+        </div>
+
+        <div id="goals" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Minhas Metas</div>
+                    <button id="addGoalBtn" class="btn btn-primary">+ Nova Meta</button>
+                </div>
+                <div id="goalsList">
+                    <!-- Metas serão carregadas aqui -->
+                </div>
+            </div>
+        </div>
+
+        <div id="reminders" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Meus Lembretes</div>
+                    <button id="addReminderBtn" class="btn btn-primary">+ Novo Lembrete</button>
+                </div>
+                <div id="remindersList">
+                    <!-- Lembretes serão carregados aqui -->
+                </div>
+            </div>
+        </div>
+
+        <div id="progress" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Meu Progresso</div>
+                    <select id="chartType" class="form-control" style="width: auto;">
+                        <option value="week">Esta Semana</option>
+                        <option value="month">Este Mês</option>
+                        <option value="3months">Últimos 3 Meses</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="moodChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nova Meta -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Nova Meta</div>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="goalTitle">Título da Meta</label>
+                    <input type="text" id="goalTitle" class="form-control" placeholder="Ex: Fazer exercícios 3x por semana">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="goalDescription">Descrição (opcional)</label>
+                    <textarea id="goalDescription" class="form-control" rows="2" placeholder="Detalhes sobre sua meta"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="goalType">Tipo de Meta</label>
+                    <select id="goalType" class="form-control">
+                        <option value="daily">Diária</option>
+                        <option value="weekly">Semanal</option>
+                        <option value="monthly">Mensal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="goalDueDate">Data Limite</label>
+                    <input type="date" id="goalDueDate" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-neutral modal-close-btn">Cancelar</button>
+                <button id="saveGoalBtn" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Novo Lembrete -->
+    <div id="reminderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Novo Lembrete</div>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label" for="reminderTitle">Título do Lembrete</label>
+                    <input type="text" id="reminderTitle" class="form-control" placeholder="Ex: Tomar medicação">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reminderType">Tipo</label>
+                    <select id="reminderType" class="form-control">
+                        <option value="medication">Medicação</option>
+                        <option value="appointment">Consulta</option>
+                        <option value="selfcare">Autocuidado</option>
+                        <option value="other">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reminderTime">Horário</label>
+                    <input type="time" id="reminderTime" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reminderRepeat">Repetir</label>
+                    <select id="reminderRepeat" class="form-control">
+                        <option value="daily">Diariamente</option>
+                        <option value="weekdays">Dias de semana</option>
+                        <option value="weekends">Finais de semana</option>
+                        <option value="none">Não repetir</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-neutral modal-close-btn">Cancelar</button>
+                <button id="saveReminderBtn" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Variáveis globais
+        let db;
+        let currentMood = null;
+        let chartInstance = null;
+        const behaviorList = [
+            { id: 'exercise', label: 'Exercício físico' },
+            { id: 'meditation', label: 'Meditação' },
+            { id: 'goodSleep', label: 'Boa noite de sono' },
+            { id: 'healthyEating', label: 'Alimentação saudável' },
+            { id: 'socialActivity', label: 'Atividade social' },
+            { id: 'avoidedTriggers', label: 'Evitei gatilhos' }
+        ];
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            initDatabase();
+            setupEventListeners();
+            updateCurrentDate();
+            generateBehaviorCheckboxes();
+        });
+
+        // Inicializar banco de dados IndexedDB
+        function initDatabase() {
+            const request = window.indexedDB.open('MenteBemDB', 1);
+            
+            request.onerror = function(event) {
+                console.error('Erro ao abrir banco de dados:', event.target.error);
+            };
+            
+            request.onupgradeneeded = function(event) {
+                const db = event.target.result;
+                
+                // Armazenar check-ins diários
+                if (!db.objectStoreNames.contains('checkins')) {
+                    const checkinsStore = db.createObjectStore('checkins', { keyPath: 'date' });
+                    checkinsStore.createIndex('date', 'date', { unique: true });
+                }
+                
+                // Armazenar metas
+                if (!db.objectStoreNames.contains('goals')) {
+                    const goalsStore = db.createObjectStore('goals', { keyPath: 'id', autoIncrement: true });
+                    goalsStore.createIndex('type', 'type', { unique: false });
+                    goalsStore.createIndex('dueDate', 'dueDate', { unique: false });
+                }
+                
+                // Armazenar lembretes
+                if (!db.objectStoreNames.contains('reminders')) {
+                    const remindersStore = db.createObjectStore('reminders', { keyPath: 'id', autoIncrement: true });
+                    remindersStore.createIndex('type', 'type', { unique: false });
+                    remindersStore.createIndex('time', 'time', { unique: false });
+                }
+            };
+            
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log('Banco de dados inicializado com sucesso');
+                
+                // Carregar dados
+                loadGoals();
+                loadReminders();
+                loadProgressData();
+                checkTodayCheckin();
+            };
+        }
+
+        // Configurar listeners de eventos
+        function setupEventListeners() {
+            // Tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(this.dataset.tab).classList.add('active');
+                    
+                    if (this.dataset.tab === 'progress') {
+                        loadProgressData();
+                    }
+                });
+            });
+            
+            // Seletor de humor
+            document.querySelectorAll('.mood-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.mood-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    currentMood = parseInt(this.dataset.mood);
+                });
+            });
+            
+            // Botão de check-in
+            document.getElementById('saveCheckIn').addEventListener('click', saveCheckIn);
+            
+            // Botões para abrir modals
+            document.getElementById('addGoalBtn').addEventListener('click', () => openModal('goalModal'));
+            document.getElementById('addReminderBtn').addEventListener('click', () => openModal('reminderModal'));
+            
+            // Fechar modals
+            document.querySelectorAll('.modal-close, .modal-close-btn').forEach(btn => {
+                btn.addEventListener('click', closeAllModals);
+            });
+            
+            // Salvar meta e lembrete
+            document.getElementById('saveGoalBtn').addEventListener('click', saveGoal);
+            document.getElementById('saveReminderBtn').addEventListener('click', saveReminder);
+            
+            // Tipo de gráfico
+            document.getElementById('chartType').addEventListener('change', loadProgressData);
+            
+            // Modo discreto
+            document.getElementById('discreetModeBtn').addEventListener('click', toggleDiscreetMode);
+        }
+
+        // Atualizar data atual
+        function updateCurrentDate() {
+            const dateElement = document.getElementById('currentDate');
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.textContent = now.toLocaleDateString('pt-BR', options);
+        }
+
+        // Gerar checkboxes de comportamentos
+        function generateBehaviorCheckboxes() {
+            const container = document.getElementById('behaviors');
+            
+            behaviorList.forEach(behavior => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <input type="checkbox" id="${behavior.id}" name="behaviors" value="${behavior.id}">
+                    <label for="${behavior.id}">${behavior.label}</label>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Verificar se já fez check-in hoje
+        function checkTodayCheckin() {
+            const today = new Date().toISOString().split('T')[0];
+            
+            const transaction = db.transaction(['checkins'], 'readonly');
+            const store = transaction.objectStore('checkins');
+            const request = store.get(today);
+            
+            request.onsuccess = function(event) {
+                if (request.result) {
+                    // Já fez check-in hoje
+                    document.getElementById('saveCheckIn').textContent = 'Atualizar Check-in';
+                    
+                    // Preencher os dados do check-in
+                    const checkin = request.result;
+                    
+                    // Selecionar o humor
+                    if (checkin.mood) {
+                        document.querySelector(`.mood-option[data-mood="${checkin.mood}"]`).classList.add('selected');
+                        currentMood = checkin.mood;
+                    }
+                    
+                    // Preencher as notas
+                    document.getElementById('notes').value = checkin.notes || '';
+                    
+                    // Marcar os comportamentos
+                    if (checkin.behaviors) {
+                        checkin.behaviors.forEach(behavior => {
+                            const checkbox = document.getElementById(behavior);
+                            if (checkbox) checkbox.checked = true;
+                        });
+                    }
+                }
+            };
+        }
+
+        // Salvar check-in
+        function saveCheckIn() {
+            if (!currentMood) {
+                alert('Por favor, selecione como você está se sentindo hoje.');
+                return;
+            }
+            
+            const today = new Date().toISOString().split('T')[0];
+            const notes = document.getElementById('notes').value;
+            
+            // Coletar comportamentos marcados
+            const behaviors = [];
+            document.querySelectorAll('input[name="behaviors"]:checked').forEach(checkbox => {
+                behaviors.push(checkbox.value);
+            });
+            
+            const checkinData = {
+                date: today,
+                mood: currentMood,
+                notes: notes,
+                behaviors: behaviors,
+                timestamp: new Date().toISOString()
+            };
+            
+            const transaction = db.transaction(['checkins'], 'readwrite');
+            const store = transaction.objectStore('checkins');
+            const request = store.put(checkinData); // put atualiza se já existir
+            
+            request.onsuccess = function() {
+                alert('Check-in registrado com sucesso!');
+                document.getElementById('saveCheckIn').textContent = 'Atualizar Check-in';
+                loadProgressData(); // Atualizar gráficos
+            };
+            
+            request.onerror = function(event) {
+                console.error('Erro ao salvar check-in:', event.target.error);
+                alert('Erro ao salvar check-in. Por favor, tente novamente.');
+            };
+        }
+
+        // Abrir modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            
+            // Limpar campos
+            if (modalId === 'goalModal') {
+                document.getElementById('goalTitle').value = '';
+                document.getElementById('goalDescription').value = '';
+                document.getElementById('goalType').value = 'daily';
+                document.getElementById('goalDueDate').value = '';
+            } else if (modalId === 'reminderModal') {
+                document.getElementById('reminderTitle').value = '';
+                document.getElementById('reminderType').value = 'medication';
+                document.getElementById('reminderTime').value = '';
+                document.getElementById('reminderRepeat').value = 'daily';
+            }
+        }
+
+        // Fechar todos os modais
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // Salvar meta
+        function saveGoal() {
+            const title = document.getElementById('goalTitle').value;
+            if (!title) {
+                alert('Por favor, digite um título para a meta.');
+                return;
+            }
+            
+            const description = document.getElementById('goalDescription').value;
+            const type = document.getElementById('goalType').value;
+            const dueDate = document.getElementById('goalDueDate').value;
+            
+            if (!dueDate) {
+                alert('Por favor, selecione uma data limite.');
+                return;
+            }
+            
+            const goalData = {
+                title: title,
+                description: description,
+                type: type,
+                dueDate: dueDate,
+                completed: false,
+                createdAt: new Date().toISOString()
+            };
+            
+            const transaction = db.transaction(['goals'], 'readwrite');
+            const store = transaction.objectStore('goals');
+            const request = store.add(goalData);
+            
+            request.onsuccess = function() {
+                alert('Meta adicionada com sucesso!');
+                closeAllModals();
+                loadGoals();
+            };
+            
+            request.onerror = function(event) {
+                console.error('Erro ao salvar meta:', event.target.error);
+                alert('Erro ao salvar meta. Por favor, tente novamente.');
+            };
+        }
+
+        // Salvar lembrete
+        function saveReminder() {
+            const title = document.getElementById('reminderTitle').value;
+            if (!title) {
+                alert('Por favor, digite um título para o lembrete.');
+                return;
+            }
+            
+            const type = document.getElementById('reminderType').value;
+            const time = document.getElementById('reminderTime').value;
+            const repeat = document.getElementById('reminderRepeat').value;
+            
+            if (!time) {
+                alert('Por favor, selecione um horário.');
+                return;
+            }
+            
+            const reminderData = {
+                title: title,
+                type: type,
+                time: time,
+                repeat: repeat,
+                active: true,
+                createdAt: new Date().toISOString()
+            };
+            
+            const transaction = db.transaction(['reminders'], 'readwrite');
+            const store = transaction.objectStore('reminders');
+            const request = store.add(reminderData);
+            
+            request.onsuccess = function() {
+                alert('Lembrete adicionado com sucesso!');
+                closeAllModals();
+                loadReminders();
+                
+                // Solicitar permissão para notificações
+                if (Notification && Notification.permission !== 'granted') {
+                    Notification.requestPermission();
+                }
+            };
+            
+            request.onerror = function(event) {
+                console.error('Erro ao salvar lembrete:', event.target.error);
+                alert('Erro ao salvar lembrete. Por favor, tente novamente.');
+            };
+        }
+
+        // Carregar metas
+        function loadGoals() {
+            const goalsList = document.getElementById('goalsList');
+            goalsList.innerHTML = '';
+            
+            const transaction = db.transaction(['goals'], 'readonly');
+            const store = transaction.objectStore('goals');
+            const request = store.openCursor();
+            
+            request.onsuccess = function(event) {
+                const cursor = event.target.result;
+                
+                if (cursor) {
+                    const goal = cursor.value;
+                    const goalElement = document.createElement('div');
+                    goalElement.className = 'goal-item';
+                    goalElement.innerHTML = `
+                        <div class="goal-info">
+                            <div class="goal-title">${goal.title}</div>
+                            <div class="goal-due">Prazo: ${new Date(goal.dueDate).toLocaleDateString('pt-BR')}</div>
+                        </div>
+                        <div class="goal-actions">
+                            <button class="btn btn-success complete-goal" data-id="${cursor.key}">✓</button>
+                            <button class="btn btn-warning delete-goal" data-id="${cursor.key}">×</button>
+                        </div>
+                    `;
+                    goalsList.appendChild(goalElement);
+                    cursor.continue();
+                } else if (goalsList.innerHTML === '') {
+                    goalsList.innerHTML = '<p style="padding: 1rem; text-align: center;">Nenhuma meta cadastrada. Clique em "+ Nova Meta" para começar.</p>';
+                }
+            };
+            
+            request.onerror = function(event) {
+                console.error('Erro ao carregar metas:', event.target.error);
+                goalsList.innerHTML = '<p style="padding: 1rem; text-align: center;">Erro ao carregar metas. Por favor, recarregue a página.</p>';
+            };
+            
+            // Adicionar eventos após carregar as metas
+            setTimeout(() => {
+                document.querySelectorAll('.complete-goal').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        completeGoal(parseInt(this.dataset.id));
+                    });
+                });
+                
+                document.querySelectorAll('.delete-goal').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        deleteGoal(parseInt(this.dataset.id));
+                    });
+                });
+            }, 100);
+        }
+
+        // Completar meta
+        function completeGoal(id) {
+            const transaction = db.transaction(['goals'], 'readwrite');
+            const store = transaction.objectStore('goals');
+            const request = store.get(id);
+            
+            request.onsuccess = function(event) {
+                const goal = request.result;
+                goal.completed = true;
+                store.put(goal);
+                loadGoals();
+            };
+        }
+
+        // Excluir meta
+        function deleteGoal(id) {
+            if (confirm('Tem certeza que deseja excluir esta meta?')) {
+                const transaction = db.transaction(['goals'], 'readwrite');
+                const store = transaction.objectStore('goals');
+                store.delete(id);
+                transaction.oncomplete = function() {
+                    loadGoals();
+                };
+            }
+        }
+
+        // Carregar lembretes
+        function loadReminders() {
+            const remindersList = document.getElementById('remindersList');
+            remindersList.innerHTML = '';
+            
+            const transaction = db.transaction(['reminders'], 'readonly');
+            const store = transaction.objectStore('reminders');
+            const request = store.openCursor();
+            
+            request.onsuccess = function(event) {
+                const cursor = event.target.result;
+                
+                if (cursor) {
+                    const reminder = cursor.value;
+                    const reminderElement = document.createElement('div');
+                    reminderElement.className = 'reminder-item';
+                    
+                    // Ícone com base no tipo
+                    let icon = '⏰';
+                    if (reminder.type === 'medication') icon = '💊';
+                    else if (reminder.type === 'appointment') icon = '🩺';
+                    else if (reminder.type === 'selfcare') icon = '🧘';
+                    
+                    reminderElement.innerHTML = `
+                        <div class="reminder-info">
+                            <div class="reminder-title">${icon} ${reminder.title}</div>
+                            <div class="reminder-time">
+                                ${reminder.time} • 
+                                ${reminder.repeat === 'daily' ? 'Diariamente' : 
+                                  reminder.repeat === 'weekdays' ? 'Dias de semana' : 
+                                  reminder.repeat === 'weekends' ? 'Finais de semana' : 'Único'}
+                            </div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn ${reminder.active ? 'btn-success' : 'btn-neutral'} toggle-reminder" data-id="${cursor.key}" data-active="${reminder.active}">
+                                ${reminder.active ? '✓' : '❘❘'}
+                            </button>
+                            <button class="btn btn-warning delete-reminder" data-id="${cursor.key}">×</button>
+                        </div>
+                    `;
+                    remindersList.appendChild(reminderElement);
+                    cursor.continue();
+                } else if (remindersList.innerHTML === '') {
+                    remindersList.innerHTML = '<p style="padding: 1rem; text-align: center;">Nenhum lembrete cadastrado. Clique em "+ Novo Lembrete" para começar.</p>';
+                }
+            };
+            
+            request.onerror = function(event) {
+                console.error('Erro ao carregar lembretes:', event.target.error);
+                remindersList.innerHTML = '<p style="padding: 1rem; text-align: center;">Erro ao carregar lembretes. Por favor, recarregue a página.</p>';
+            };
+            
+            // Adicionar eventos após carregar os lembretes
+            setTimeout(() => {
+                document.querySelectorAll('.toggle-reminder').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        toggleReminder(parseInt(this.dataset.id), this.dataset.active === 'true');
+                    });
+                });
+                
+                document.querySelectorAll('.delete-reminder').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        deleteReminder(parseInt(this.dataset.id));
+                    });
+                });
+            }, 100);
+        }
+
+        // Alternar ativação do lembrete
+        function toggleReminder(id, isActive) {
+            const transaction = db.transaction(['reminders'], 'readwrite');
+            const store = transaction.objectStore('reminders');
+            const request = store.get(id);
+            
+            request.onsuccess = function(event) {
+                const reminder = request.result;
+                reminder.active = !isActive;
+                store.put(reminder);
+                loadReminders();
+            };
+        }
+
+        // Excluir lembrete
+        function deleteReminder(id) {
+            if (confirm('Tem certeza que deseja excluir este lembrete?')) {
+                const transaction = db.transaction(['reminders'], 'readwrite');
+                const store = transaction.objectStore('reminders');
+                store.delete(id);
+                transaction.oncomplete = function() {
+                    loadReminders();
+                };
+            }
+        }
+
+        // Carregar dados de progresso
+        function loadProgressData() {
+            const chartType = document.getElementById('chartType').value;
+            let startDate, endDate;
+            const today = new Date();
+            endDate = new Date(today);
+            
+            if (chartType === 'week') {
+                startDate = new Date(today);
+                startDate.setDate(startDate.getDate() - 7);
+            } else if (chartType === 'month') {
+                startDate = new Date(today);
+                startDate.setMonth(startDate.getMonth() - 1);
+            } else if (chartType === '3months') {
+                startDate = new Date(today);
+                startDate.setMonth(startDate.getMonth() - 3);
+            }
+            
+            const transaction = db.transaction(['checkins'], 'readonly');
+            const store = transaction.objectStore('checkins');
+            const index = store.index('date');
+            const range = IDBKeyRange.bound(
+                startDate.toISOString().split('T')[0],
+                endDate.toISOString().split('T')[0],
+                false, true
+            );
+            
+            const request = index.openCursor(range);
+            const moodData = {};
+            const behaviorData = {};
+            
+            request.onsuccess = function(event) {
+                const cursor = event.target.result;
+                
+                if (cursor) {
+                    const checkin = cursor.value;
+                    moodData[checkin.date] = checkin.mood;
+                    
+                    checkin.behaviors.forEach(behavior => {
+                        if (!behaviorData[behavior]) {
+                            behaviorData[behavior] = 0;
+                        }
+                        behaviorData[behavior]++;
+                    });
+                    
+                    cursor.continue();
+                } else {
+                    renderChart(moodData, startDate, endDate);
+                }
+            };
+        }
+
+        // Renderizar gráfico
+        function renderChart(moodData, startDate, endDate) {
+            const ctx = document.getElementById('moodChart').getContext('2d');
+            
+            // Destruir gráfico anterior, se existir
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            // Criar array de datas entre startDate e endDate
+            const dateLabels = [];
+            const moodValues = [];
+            let currentDate = new Date(startDate);
+            
+            while (currentDate <= endDate) {
+                const dateStr = currentDate.toISOString().split('T')[0];
+                dateLabels.push(dateStr);
+                
+                // Valor do humor para essa data ou null se não existir
+                const moodValue = moodData[dateStr] || null;
+                moodValues.push(moodValue);
+                
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            
+            // Criar gráfico
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dateLabels.map(date => new Date(date).toLocaleDateString('pt-BR')),
+                    datasets: [{
+                        label: 'Humor',
+                        data: moodValues,
+                        borderColor: 'rgb(94, 114, 228)',
+                        backgroundColor: 'rgba(94, 114, 228, 0.1)',
+                        tension: 0.2,
+                        pointBackgroundColor: 'rgb(94, 114, 228)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        spanGaps: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 6,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    if (value === 0) return '';
+                                    const moodLabels = ['', 'Péssimo', 'Mal', 'Neutro', 'Bem', 'Excelente'];
+                                    return moodLabels[value];
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const moodLabels = ['', 'Péssimo', 'Mal', 'Neutro', 'Bem', 'Excelente'];
+                                    return moodLabels[context.raw];
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Alternar modo discreto
+        function toggleDiscreetMode() {
+            const body = document.body;
+            body.classList.toggle('discreet-mode');
+            
+            const btn = document.getElementById('discreetModeBtn');
+            if (body.classList.contains('discreet-mode')) {
+                btn.textContent = 'Modo Normal';
+                document.title = 'Portal - Dashboard';
+            } else {
+                btn.textContent = 'Modo Discreto';
+                document.title = 'MenteBem Diário';
+            }
+        }
+    </script>
+</body>
+</html>
